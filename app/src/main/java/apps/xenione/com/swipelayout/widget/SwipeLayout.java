@@ -93,8 +93,7 @@ public class SwipeLayout extends FrameLayout {
             case MotionEvent.ACTION_MOVE: {
                 float deltaX = event.getX() - mLastTouchX;
                 if (mIsDragging) {
-                    //TODO do translation
-                    Log.i(TAG, "drag delta: " + deltaX);
+                    translateX(deltaX);
                 } else if (Math.abs(deltaX) > mTouchSlop) {
                     disallowParentInterceptTouchEvent(true);
                     mIsDragging = true;
@@ -118,5 +117,11 @@ public class SwipeLayout extends FrameLayout {
         if (parent != null) {
             parent.requestDisallowInterceptTouchEvent(disallow);
         }
+    }
+
+    public void translateX(float deltaX) {
+        float transX = getTranslationX() + deltaX;
+        setTranslationX(transX);
+        Log.i(TAG, "translation to: " + transX);
     }
 }
