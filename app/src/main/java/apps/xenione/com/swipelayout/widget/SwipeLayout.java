@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -68,6 +69,9 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
+                if(!mScroller.isFinished()) {
+                    mScroller.forceFinished(true);
+                }
                 mLastTouchX = (int) ev.getX();
                 break;
             }
@@ -96,23 +100,25 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
+                if(!mScroller.isFinished()) {
+                    mScroller.forceFinished(true);
+                }
                 mLastTouchX = (int) event.getX();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
                 int deltaX = (int) event.getX() - mLastTouchX;
                 if (mIsDragging) {
-                    translateX(deltaX);
+                    translateBy(deltaX);
                 } else if (Math.abs(deltaX) > mTouchSlop) {
                     disallowParentInterceptTouchEvent(true);
                     mIsDragging = true;
                 }
-
                 break;
-
             }
             case MotionEvent.ACTION_UP: {
                 disallowParentInterceptTouchEvent(false);
+                fling();
                 mIsDragging = false;
                 break;
             }
@@ -128,13 +134,33 @@ public class SwipeLayout extends FrameLayout {
         }
     }
 
-    public void translateX(int deltaX) {
-        int croppedX = ensureInsideBounds(getDeltaX() + deltaX);
+    private void fling() {
+        int startX = 0;
+        int endX = (getDeltaX() > ((mRightLimit - mLeftLimit) / 2)) ? mRightLimit : mLeftLimit;
+        int deltaX = endX - getDeltaX();
+        mScroller.startScroll(startX, 0, deltaX, 3 * 1000);
+        ViewCompat.postOnAnimation(this, new Runnable() {
+            @Override
+            public void run() {
+                if (mScroller.computeScrollOffset()) {
+                    translateBy(mScroller.getCurrX());
+                    ViewCompat.postOnAnimation(SwipeLayout.this, this);
+                }
+            }
+        });
+    }
+
+    public void translateTo(int x) {
+        int croppedX = ensureInsideBounds(x);
         if (getTranslationX() == croppedX) {
             return;
         }
         setDeltaX(croppedX);
         Log.i(TAG, "translation to: " + croppedX);
+    }
+
+    public void translateBy(int deltaX) {
+        translateTo(getDeltaX() + deltaX);
     }
 
     public void setDeltaX(int deltaX) {
@@ -144,7 +170,7 @@ public class SwipeLayout extends FrameLayout {
     public int getDeltaX() {
         return (int) getTranslationX();
     }
-    
+
     private int ensureInsideBounds(int x) {
         int inBounds = x;
         if (x < mLeftLimit) {
