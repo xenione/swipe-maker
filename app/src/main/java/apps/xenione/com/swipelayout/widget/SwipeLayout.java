@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.OverScroller;
 
@@ -64,6 +65,9 @@ public class SwipeLayout extends FrameLayout {
             case MotionEvent.ACTION_MOVE: {
                 float deltaX = Math.abs(ev.getX() - mLastTouchX);
                 mIsDragging = deltaX > mTouchSlop;
+                if (mIsDragging) {
+                    disallowParentInterceptTouchEvent(true);
+                }
                 return mIsDragging;
             }
         }
@@ -92,6 +96,7 @@ public class SwipeLayout extends FrameLayout {
                     //TODO do translation
                     Log.i(TAG, "drag delta: " + deltaX);
                 } else if (Math.abs(deltaX) > mTouchSlop) {
+                    disallowParentInterceptTouchEvent(true);
                     mIsDragging = true;
                 }
 
@@ -99,10 +104,19 @@ public class SwipeLayout extends FrameLayout {
 
             }
             case MotionEvent.ACTION_UP: {
+                disallowParentInterceptTouchEvent(false);
+                mIsDragging = false;
                 break;
             }
         }
 
         return true;
+    }
+
+    public void disallowParentInterceptTouchEvent(boolean disallow) {
+        ViewParent parent = this.getParent();
+        if (parent != null) {
+            parent.requestDisallowInterceptTouchEvent(disallow);
+        }
     }
 }
