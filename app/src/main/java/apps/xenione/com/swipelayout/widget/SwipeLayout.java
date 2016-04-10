@@ -23,6 +23,8 @@ public class SwipeLayout extends FrameLayout {
     private OverScroller mScroller;
     private float mLastTouchX;
     private boolean mIsDragging = false;
+    private int mRightLimit = 300;
+    private int mLeftLimit = 0;
 
     public SwipeLayout(Context context) {
         this(context, null);
@@ -46,6 +48,13 @@ public class SwipeLayout extends FrameLayout {
     private void init() {
         mTouchSlop = ViewConfiguration.get(this.getContext()).getScaledTouchSlop();
         mScroller = new OverScroller(this.getContext());
+    }
+
+    public void setRightLimit(int rightLimit) {
+        mRightLimit = rightLimit;
+    }
+    public void setLeftLimit(int leftLimit) {
+        mLeftLimit = leftLimit;
     }
 
     @Override
@@ -120,8 +129,18 @@ public class SwipeLayout extends FrameLayout {
     }
 
     public void translateX(float deltaX) {
-        float transX = getTranslationX() + deltaX;
-        setTranslationX(transX);
-        Log.i(TAG, "translation to: " + transX);
+        float croppedX = ensureInsideBounds(getTranslationX() + deltaX);
+        setTranslationX(croppedX);
+        Log.i(TAG, "translation to: " + croppedX);
+    }
+
+    private float ensureInsideBounds(float x) {
+        float inBounds = x;
+        if (x < mLeftLimit) {
+            inBounds = mLeftLimit;
+        } else if (x > mRightLimit) {
+            inBounds = mRightLimit;
+        }
+        return inBounds;
     }
 }
