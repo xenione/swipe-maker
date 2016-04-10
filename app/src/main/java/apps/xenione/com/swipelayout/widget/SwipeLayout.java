@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class SwipeLayout extends FrameLayout {
+public class SwipeLayout extends FrameLayout implements Runnable{
 
     private static final String TAG = "SwipeLayout";
 
@@ -130,6 +130,14 @@ public class SwipeLayout extends FrameLayout {
         return true;
     }
 
+    @Override
+    public void run() {
+        if (mHelperScroller.computeScrollOffset()) {
+            translateTo(mHelperScroller.getCurrX());
+            ViewCompat.postOnAnimation(SwipeLayout.this, this);
+        }
+    }
+
     public void disallowParentInterceptTouchEvent(boolean disallow) {
         ViewParent parent = this.getParent();
         if (parent != null) {
@@ -141,15 +149,7 @@ public class SwipeLayout extends FrameLayout {
         int startX = getDeltaX();
         int endX = (startX > ((mRightLimit - mLeftLimit) / 2)) ? mRightLimit : mLeftLimit;
         mHelperScroller.startScroll(startX, endX);
-        ViewCompat.postOnAnimation(this, new Runnable() {
-            @Override
-            public void run() {
-                if (mHelperScroller.computeScrollOffset()) {
-                    translateTo(mHelperScroller.getCurrX());
-                    ViewCompat.postOnAnimation(SwipeLayout.this, this);
-                }
-            }
-        });
+        ViewCompat.postOnAnimation(this, this);
     }
 
     public void translateTo(int x) {
@@ -162,7 +162,9 @@ public class SwipeLayout extends FrameLayout {
     }
 
     private void notifyListener(int desX) {
-        mOnTranslateChangeListener.onTranslateChange((float) desX / (mRightLimit - mLeftLimit));
+        if (mOnTranslateChangeListener != null) {
+            mOnTranslateChangeListener.onTranslateChange((float) desX / (mRightLimit - mLeftLimit));
+        }
     }
 
     public void translateBy(int deltaX) {
