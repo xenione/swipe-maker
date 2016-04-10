@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
@@ -19,12 +18,17 @@ public class SwipeLayout extends FrameLayout {
 
     private static final String TAG = "SwipeLayout";
 
+    public interface OnTranslateChangeListener {
+        void onTranslateChange(float percent);
+    }
+
     private int mTouchSlop;
     private ScrollerHelper mHelperScroller;
     private int mLastTouchX;
     private boolean mIsDragging = false;
     private int mRightLimit = 300;
     private int mLeftLimit = 0;
+    private OnTranslateChangeListener mOnTranslateChangeListener;
 
     public SwipeLayout(Context context) {
         this(context, null);
@@ -55,6 +59,10 @@ public class SwipeLayout extends FrameLayout {
     }
     public void setLeftLimit(int leftLimit) {
         mLeftLimit = leftLimit;
+    }
+
+    public void setOnTranslateChangeListener(OnTranslateChangeListener listener) {
+        mOnTranslateChangeListener = listener;
     }
 
     @Override
@@ -150,7 +158,11 @@ public class SwipeLayout extends FrameLayout {
             return;
         }
         setDeltaX(croppedX);
-        Log.i(TAG, "translation to: " + croppedX);
+        notifyListener(croppedX);
+    }
+
+    private void notifyListener(int desX) {
+        mOnTranslateChangeListener.onTranslateChange((float) desX / (mRightLimit - mLeftLimit));
     }
 
     public void translateBy(int deltaX) {
