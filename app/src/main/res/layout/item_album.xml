@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<apps.xenione.com.swipelayout.widget.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<apps.xenione.com.swipelayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height"
-    android:background="#ff0000"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title"
+    <ProgressBar
+        android:id="@+id/backgroundView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="La Gossa Sorda" />
+        android:layout_gravity="center" />
 
-</apps.xenione.com.swipelayout.widget.SwipeLayout>
+    <apps.xenione.com.swipelayout.widget.SwipeLayout
+        android:id="@+id/foregroundView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:background="#ff0000"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="La Gossa Sorda" />
+
+    </apps.xenione.com.swipelayout.widget.SwipeLayout>
+
+</apps.xenione.com.swipelayout.widget.CoordinatorLayout>
