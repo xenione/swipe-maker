@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
@@ -15,9 +16,12 @@ import android.widget.OverScroller;
  */
 public class SwipeLayout extends FrameLayout {
 
+    private static final String TAG = "SwipeLayout";
+
     private int mTouchSlop;
     private OverScroller mScroller;
     private float mLastTouchX;
+    private boolean mIsDragging = false;
 
     public SwipeLayout(Context context) {
         this(context, null);
@@ -45,12 +49,10 @@ public class SwipeLayout extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!isEnabled()) {
-            return true;
-        }
 
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+            mIsDragging = false;
             return false;
         }
 
@@ -61,6 +63,8 @@ public class SwipeLayout extends FrameLayout {
             }
             case MotionEvent.ACTION_MOVE: {
                 float deltaX = Math.abs(ev.getX() - mLastTouchX);
+                mIsDragging = deltaX > mTouchSlop;
+                return mIsDragging;
             }
         }
 
@@ -73,6 +77,7 @@ public class SwipeLayout extends FrameLayout {
         final int action = MotionEventCompat.getActionMasked(event);
 
         if (action == MotionEvent.ACTION_CANCEL) {
+            mIsDragging = false;
             return false;
         }
 
@@ -83,7 +88,15 @@ public class SwipeLayout extends FrameLayout {
             }
             case MotionEvent.ACTION_MOVE: {
                 float deltaX = event.getX() - mLastTouchX;
+                if (mIsDragging) {
+                    //TODO do translation
+                    Log.i(TAG, "drag delta: " + deltaX);
+                } else if (Math.abs(deltaX) > mTouchSlop) {
+                    mIsDragging = true;
+                }
+
                 break;
+
             }
             case MotionEvent.ACTION_UP: {
                 break;
