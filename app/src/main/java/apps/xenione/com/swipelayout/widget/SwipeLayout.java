@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
-import android.widget.OverScroller;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -21,7 +20,7 @@ public class SwipeLayout extends FrameLayout {
     private static final String TAG = "SwipeLayout";
 
     private int mTouchSlop;
-    private OverScroller mScroller;
+    private ScrollerHelper mHelperScroller;
     private int mLastTouchX;
     private boolean mIsDragging = false;
     private int mRightLimit = 300;
@@ -48,7 +47,7 @@ public class SwipeLayout extends FrameLayout {
 
     private void init() {
         mTouchSlop = ViewConfiguration.get(this.getContext()).getScaledTouchSlop();
-        mScroller = new OverScroller(this.getContext());
+        mHelperScroller = new ScrollerHelper(this.getContext());
     }
 
     public void setRightLimit(int rightLimit) {
@@ -69,9 +68,7 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                if(!mScroller.isFinished()) {
-                    mScroller.forceFinished(true);
-                }
+                mHelperScroller.finish();
                 mLastTouchX = (int) ev.getX();
                 break;
             }
@@ -100,9 +97,7 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                if(!mScroller.isFinished()) {
-                    mScroller.forceFinished(true);
-                }
+                mHelperScroller.finish();
                 mLastTouchX = (int) event.getX();
                 break;
             }
@@ -135,15 +130,14 @@ public class SwipeLayout extends FrameLayout {
     }
 
     private void fling() {
-        int startX = 0;
-        int endX = (getDeltaX() > ((mRightLimit - mLeftLimit) / 2)) ? mRightLimit : mLeftLimit;
-        int deltaX = endX - getDeltaX();
-        mScroller.startScroll(startX, 0, deltaX, 3 * 1000);
+        int startX = getDeltaX();
+        int endX = (startX > ((mRightLimit - mLeftLimit) / 2)) ? mRightLimit : mLeftLimit;
+        mHelperScroller.startScroll(startX, endX);
         ViewCompat.postOnAnimation(this, new Runnable() {
             @Override
             public void run() {
-                if (mScroller.computeScrollOffset()) {
-                    translateBy(mScroller.getCurrX());
+                if (mHelperScroller.computeScrollOffset()) {
+                    translateTo(mHelperScroller.getCurrX());
                     ViewCompat.postOnAnimation(SwipeLayout.this, this);
                 }
             }
