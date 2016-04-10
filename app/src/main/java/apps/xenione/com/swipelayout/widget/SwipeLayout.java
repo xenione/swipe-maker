@@ -21,7 +21,7 @@ public class SwipeLayout extends FrameLayout {
 
     private int mTouchSlop;
     private OverScroller mScroller;
-    private float mLastTouchX;
+    private int mLastTouchX;
     private boolean mIsDragging = false;
     private int mRightLimit = 300;
     private int mLeftLimit = 0;
@@ -68,11 +68,11 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mLastTouchX = ev.getX();
+                mLastTouchX = (int) ev.getX();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                float deltaX = Math.abs(ev.getX() - mLastTouchX);
+                int deltaX = Math.abs((int) ev.getX() - mLastTouchX);
                 mIsDragging = deltaX > mTouchSlop;
                 if (mIsDragging) {
                     disallowParentInterceptTouchEvent(true);
@@ -96,11 +96,11 @@ public class SwipeLayout extends FrameLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mLastTouchX = event.getX();
+                mLastTouchX = (int) event.getX();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                float deltaX = event.getX() - mLastTouchX;
+                int deltaX = (int) event.getX() - mLastTouchX;
                 if (mIsDragging) {
                     translateX(deltaX);
                 } else if (Math.abs(deltaX) > mTouchSlop) {
@@ -128,14 +128,25 @@ public class SwipeLayout extends FrameLayout {
         }
     }
 
-    public void translateX(float deltaX) {
-        float croppedX = ensureInsideBounds(getTranslationX() + deltaX);
-        setTranslationX(croppedX);
+    public void translateX(int deltaX) {
+        int croppedX = ensureInsideBounds(getDeltaX() + deltaX);
+        if (getTranslationX() == croppedX) {
+            return;
+        }
+        setDeltaX(croppedX);
         Log.i(TAG, "translation to: " + croppedX);
     }
 
-    private float ensureInsideBounds(float x) {
-        float inBounds = x;
+    public void setDeltaX(int deltaX) {
+        setTranslationX(deltaX);
+    }
+
+    public int getDeltaX() {
+        return (int) getTranslationX();
+    }
+    
+    private int ensureInsideBounds(int x) {
+        int inBounds = x;
         if (x < mLeftLimit) {
             inBounds = mLeftLimit;
         } else if (x > mRightLimit) {
