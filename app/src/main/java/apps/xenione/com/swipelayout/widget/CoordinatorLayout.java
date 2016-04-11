@@ -3,6 +3,7 @@ package apps.xenione.com.swipelayout.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,6 +18,13 @@ public class CoordinatorLayout extends FrameLayout implements SwipeLayout.OnTran
     private View mBackgroundView;
     private SwipeLayout mForegroundView;
 
+    public Runnable initializeViews = new Runnable() {
+        @Override
+        public void run() {
+            mForegroundView.translateTo(0);
+        }
+    };
+
     public CoordinatorLayout(Context context) {
         super(context);
     }
@@ -27,6 +35,13 @@ public class CoordinatorLayout extends FrameLayout implements SwipeLayout.OnTran
 
     public CoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        mForegroundView.setRightLimit(right);
+        mForegroundView.setLeftLimit(left);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -40,6 +55,13 @@ public class CoordinatorLayout extends FrameLayout implements SwipeLayout.OnTran
         mBackgroundView = findViewById(R.id.backgroundView);
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mForegroundView.setOnTranslateChangeListener(CoordinatorLayout.this);
+        init();
+    }
+
+    public void init() {
+        if (!isInEditMode()) {
+            ViewCompat.postOnAnimation(this, initializeViews);
+        }
     }
 
     @Override

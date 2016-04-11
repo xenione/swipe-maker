@@ -10,6 +10,7 @@ import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.data.Album;
+import apps.xenione.com.swipelayout.widget.CoordinatorLayout;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -30,6 +31,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
+        holder.coordinatorLayout.init();
         holder.title.setText(album.getBandName());
     }
 
@@ -46,9 +48,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title;
+        public CoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
+            coordinatorLayout = (CoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
         }
     }

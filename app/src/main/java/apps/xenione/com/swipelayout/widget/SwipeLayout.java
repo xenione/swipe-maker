@@ -26,8 +26,8 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     private ScrollerHelper mHelperScroller;
     private int mLastTouchX;
     private boolean mIsDragging = false;
-    private int mRightLimit = 300;
-    private int mLeftLimit = 0;
+    private int mRightLimit;
+    private int mLeftLimit;
     private OnTranslateChangeListener mOnTranslateChangeListener;
 
     public SwipeLayout(Context context) {
