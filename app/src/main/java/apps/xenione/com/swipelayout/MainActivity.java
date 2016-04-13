@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import apps.xenione.com.swipelayout.fragment.HalfRightSwipeFragment;
 import apps.xenione.com.swipelayout.fragment.RightSwipeFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_rightswipe) {
             showFragment(RightSwipeFragment.newInstance(), RightSwipeFragment.TAG);
         } else if (id == R.id.nav_half_swipe) {
-
+            showFragment(HalfRightSwipeFragment.newInstance(), HalfRightSwipeFragment.TAG);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

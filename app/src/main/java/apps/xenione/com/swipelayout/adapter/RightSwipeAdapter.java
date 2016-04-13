@@ -13,12 +13,13 @@ import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.data.Album;
-import apps.xenione.com.swipelayout.widget.CoordinatorLayout;
+import apps.xenione.com.swipelayout.widget.AbsCoordinatorLayout;
+import apps.xenione.com.swipelayout.widget.RightCoordinatorLayout;
 
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
         void onItemDismissed(int position);
@@ -28,7 +29,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public AlbumAdapter(Context context, List<Album> albums) {
+    public RightSwipeAdapter(Context context, List<Album> albums) {
         this.context = context;
         this.mAlbums = albums;
     }
@@ -69,7 +70,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         mOnItemDismissListener = listener;
     }
 
-    public class OnItemDismiss implements CoordinatorLayout.OnDismissListener {
+    public class OnItemDismiss implements AbsCoordinatorLayout.OnDismissListener {
 
         private int position;
 
@@ -88,11 +89,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         public TextView title;
         public TextView bandName;
         public ImageView discImage;
-        public CoordinatorLayout coordinatorLayout;
+        public RightCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
-            coordinatorLayout = (CoordinatorLayout) view;
+            coordinatorLayout = (RightCoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
