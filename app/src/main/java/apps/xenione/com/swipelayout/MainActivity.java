@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new AlbumAdapter(Album.getAlbum());
+        mAdapter = new AlbumAdapter(this, Album.getAlbum());
         mAdapter.setOnItemDismissListener(this);
         recyclerView.setAdapter(mAdapter);
     }

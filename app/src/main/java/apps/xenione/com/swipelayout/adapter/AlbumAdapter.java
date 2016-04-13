@@ -1,9 +1,12 @@
 package apps.xenione.com.swipelayout.adapter;
 
+import android.content.Context;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -22,12 +25,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     }
 
     private List<Album> mAlbums;
+    private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public AlbumAdapter(List<Album> albums) {
+    public AlbumAdapter(Context context, List<Album> albums) {
+        this.context = context;
         this.mAlbums = albums;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +43,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         Album album = getItem(position);
         holder.coordinatorLayout.init();
         holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
-        holder.title.setText(album.getBandName());
+        holder.title.setText(album.getName());
+        holder.bandName.setText(album.getBandName());
+        ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme());
+        holder.discImage.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme()));
     }
 
     @Override
@@ -79,12 +86,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title;
+        public TextView bandName;
+        public ImageView discImage;
         public CoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
             coordinatorLayout = (CoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
+            bandName = (TextView) view.findViewById(R.id.bandName);
+            discImage = (ImageView) view.findViewById(R.id.bg_disc);
         }
     }
 }
