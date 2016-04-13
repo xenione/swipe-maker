@@ -17,11 +17,17 @@ import apps.xenione.com.swipelayout.widget.CoordinatorLayout;
  */
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
-    private List<Album> albums;
+    public interface OnItemDismissListener {
+        void onItemDismissed(int position);
+    }
+
+    private List<Album> mAlbums;
+    private OnItemDismissListener mOnItemDismissListener;
 
     public AlbumAdapter(List<Album> albums) {
-        this.albums = albums;
+        this.mAlbums = albums;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,18 +38,43 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
         holder.coordinatorLayout.init();
+        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
         holder.title.setText(album.getBandName());
     }
 
     @Override
     public int getItemCount() {
-        return albums.size();
+        return mAlbums.size();
     }
+
+    public void deleteItem(int position) {
+        mAlbums.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
 
     private Album getItem(int position) {
-        return albums.get(position);
+        return mAlbums.get(position);
     }
 
+    public void setOnItemDismissListener(OnItemDismissListener listener) {
+        mOnItemDismissListener = listener;
+    }
+
+    public class OnItemDismiss implements CoordinatorLayout.OnDismissListener {
+
+        private int position;
+
+        public OnItemDismiss(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void onDismissed() {
+            mOnItemDismissListener.onItemDismissed(position);
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

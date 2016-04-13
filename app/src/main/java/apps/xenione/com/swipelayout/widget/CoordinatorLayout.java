@@ -15,8 +15,13 @@ import apps.xenione.com.swipelayout.R;
  */
 public class CoordinatorLayout extends FrameLayout implements SwipeLayout.OnTranslateChangeListener {
 
+    public interface OnDismissListener {
+        void onDismissed();
+    }
+
     private View mBackgroundView;
     private SwipeLayout mForegroundView;
+    private OnDismissListener mOnDismissListener;
 
     public Runnable initializeViews = new Runnable() {
         @Override
@@ -64,8 +69,14 @@ public class CoordinatorLayout extends FrameLayout implements SwipeLayout.OnTran
         }
     }
 
+    public void setOnDismissListener(OnDismissListener listener) {
+        mOnDismissListener = listener;
+    }
+
     @Override
     public void onTranslateChange(float percent) {
-
+        if (percent == 1) {
+            mOnDismissListener.onDismissed();
+        }
     }
 }

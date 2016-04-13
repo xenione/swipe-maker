@@ -11,12 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import apps.xenione.com.swipelayout.adapter.AlbumAdapter;
 import apps.xenione.com.swipelayout.data.Album;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AlbumAdapter.OnItemDismissListener {
 
     private AlbumAdapter mAdapter;
 
@@ -45,7 +46,14 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new AlbumAdapter(Album.getAlbum());
+        mAdapter.setOnItemDismissListener(this);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemDismissed(int position) {
+        mAdapter.deleteItem(position);
+        Toast.makeText(this, "item deleted at position :" + position, Toast.LENGTH_LONG).show();
     }
 
     @Override
