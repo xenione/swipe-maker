@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.widget;
+package apps.xenione.com.swipelayout.lib;
 
 import android.annotation.TargetApi;
 import android.content.Context;

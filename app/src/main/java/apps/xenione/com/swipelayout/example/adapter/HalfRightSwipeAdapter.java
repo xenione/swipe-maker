@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.adapter;
+package apps.xenione.com.swipelayout.example.adapter;
 
 import android.content.Context;
 import android.support.v4.content.res.ResourcesCompat;
@@ -12,14 +12,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
-import apps.xenione.com.swipelayout.data.Album;
-import apps.xenione.com.swipelayout.widget.AbsCoordinatorLayout;
-import apps.xenione.com.swipelayout.widget.RightCoordinatorLayout;
+import apps.xenione.com.swipelayout.example.data.Album;
+import apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout;
 
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.ViewHolder> {
+public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
         void onItemDismissed(int position);
@@ -29,14 +28,14 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public RightSwipeAdapter(Context context, List<Album> albums) {
+    public HalfRightSwipeAdapter(Context context, List<Album> albums) {
         this.context = context;
         this.mAlbums = albums;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_right_swipe, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_right_swipe, parent, false));
     }
 
     @Override
@@ -70,7 +69,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         mOnItemDismissListener = listener;
     }
 
-    public class OnItemDismiss implements AbsCoordinatorLayout.OnDismissListener {
+    public class OnItemDismiss implements HalfRightCoordinatorLayout.OnDismissListener {
 
         private int position;
 
@@ -89,11 +88,11 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         public TextView title;
         public TextView bandName;
         public ImageView discImage;
-        public RightCoordinatorLayout coordinatorLayout;
+        public HalfRightCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
-            coordinatorLayout = (RightCoordinatorLayout) view;
+            coordinatorLayout = (HalfRightCoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);

@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.data;
+package apps.xenione.com.swipelayout.example.data;
 
 import java.util.ArrayList;
 import java.util.List;

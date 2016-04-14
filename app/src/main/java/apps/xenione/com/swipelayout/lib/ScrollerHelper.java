@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.widget;
+package apps.xenione.com.swipelayout.lib;
 
 import android.content.Context;
 import android.widget.OverScroller;

@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout;
+package apps.xenione.com.swipelayout.example;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import apps.xenione.com.swipelayout.fragment.HalfRightSwipeFragment;
-import apps.xenione.com.swipelayout.fragment.RightSwipeFragment;
+import apps.xenione.com.swipelayout.R;
+import apps.xenione.com.swipelayout.example.fragment.HalfRightSwipeFragment;
+import apps.xenione.com.swipelayout.example.fragment.RightSwipeFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

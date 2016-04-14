@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.widget;
+package apps.xenione.com.swipelayout.example.swipe;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import apps.xenione.com.swipelayout.R;
+import apps.xenione.com.swipelayout.lib.AbsCoordinatorLayout;
+import apps.xenione.com.swipelayout.lib.SwipeLayout;
 
 /**
  * Created on 06/04/16.

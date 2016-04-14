@@ -1,4 +1,4 @@
-package apps.xenione.com.swipelayout.fragment;
+package apps.xenione.com.swipelayout.example.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,26 +11,26 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import apps.xenione.com.swipelayout.R;
-import apps.xenione.com.swipelayout.adapter.HalfRightSwipeAdapter;
-import apps.xenione.com.swipelayout.data.Album;
+import apps.xenione.com.swipelayout.example.adapter.RightSwipeAdapter;
+import apps.xenione.com.swipelayout.example.data.Album;
 
 /**
  * Created by Eugeni on 13/04/2016.
  */
-public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAdapter.OnItemDismissListener {
+public class RightSwipeFragment extends Fragment implements RightSwipeAdapter.OnItemDismissListener {
 
-    public static final String TAG = "HalfRightSwipeFragment";
+    public static final String TAG = "RightSwipeFragment";
 
     public static Fragment newInstance() {
-        return new HalfRightSwipeFragment();
+        return new RightSwipeFragment();
     }
 
-    private HalfRightSwipeAdapter mAdapter;
+    private RightSwipeAdapter mAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_half_right_swipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_right_swipe, container, false);
         initRecyclerView(view);
         return view;
     }
@@ -40,7 +40,7 @@ public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAd
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new HalfRightSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new RightSwipeAdapter(getContext(), Album.getAlbum());
         mAdapter.setOnItemDismissListener(this);
         recyclerView.setAdapter(mAdapter);
     }
