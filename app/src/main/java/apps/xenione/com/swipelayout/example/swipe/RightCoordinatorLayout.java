@@ -40,8 +40,7 @@ public class RightCoordinatorLayout extends AbsCoordinatorLayout implements Swip
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.setRightLimit(this.getRight());
-        mForegroundView.setLeftLimit(this.getLeft());
+        mForegroundView.anchor(this.getRight(), this.getLeft());
     }
 
     @Override

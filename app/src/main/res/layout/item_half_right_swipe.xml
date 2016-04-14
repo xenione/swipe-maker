@@ -8,7 +8,7 @@
         android:id="@+id/backgroundView"
         android:background="@color/colorAccent"
         android:src="@drawable/ic_delete"
-        android:layout_width="200dp"
+        android:layout_width="75dp"
         android:layout_height="match_parent"/>
 
     <apps.xenione.com.swipelayout.lib.SwipeLayout

@@ -50,8 +50,7 @@ public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements 
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.setRightLimit(mBackgroundView.getRight());
-        mForegroundView.setLeftLimit(mBackgroundView.getLeft());
+        mForegroundView.anchor(mBackgroundView.getRight(), mBackgroundView.getLeft());
     }
 
     @Override
