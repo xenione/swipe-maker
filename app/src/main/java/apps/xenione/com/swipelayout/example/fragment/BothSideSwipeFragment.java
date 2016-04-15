@@ -11,26 +11,26 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import apps.xenione.com.swipelayout.R;
-import apps.xenione.com.swipelayout.example.adapter.TwoStepRightSwipeAdapter;
+import apps.xenione.com.swipelayout.example.adapter.BothSideSwipeAdapter;
 import apps.xenione.com.swipelayout.example.data.Album;
 
 /**
  * Created by Eugeni on 13/04/2016.
  */
-public class TwoStepRightSwipeFragment extends Fragment implements TwoStepRightSwipeAdapter.OnItemClickListener {
+public class BothSideSwipeFragment extends Fragment implements BothSideSwipeAdapter.OnItemClickListener {
 
-    public static final String TAG = "TwoStepRightSwipeFragment";
+    public static final String TAG = "BothSideSwipeFragment";
 
     public static Fragment newInstance() {
-        return new TwoStepRightSwipeFragment();
+        return new BothSideSwipeFragment();
     }
 
-    private TwoStepRightSwipeAdapter mAdapter;
+    private BothSideSwipeAdapter mAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_two_step_right_swipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_both_side_swipe, container, false);
         initRecyclerView(view);
         return view;
     }
@@ -40,7 +40,7 @@ public class TwoStepRightSwipeFragment extends Fragment implements TwoStepRightS
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new TwoStepRightSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new BothSideSwipeAdapter(getContext(), Album.getAlbum());
         mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
     }

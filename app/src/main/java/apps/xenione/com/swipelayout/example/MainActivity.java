@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import apps.xenione.com.swipelayout.R;
+import apps.xenione.com.swipelayout.example.fragment.BothSideSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.HalfRightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.RightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.TwoStepRightSwipeFragment;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
             showFragment(HalfRightSwipeFragment.newInstance(), HalfRightSwipeFragment.TAG);
         } else if (id == R.id.nav_two_step_swipe) {
             showFragment(TwoStepRightSwipeFragment.newInstance(), TwoStepRightSwipeFragment.TAG);
+        } else if (id == R.id.nav_both_side_swipe) {
+            showFragment(BothSideSwipeFragment.newInstance(), BothSideSwipeFragment.TAG);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
