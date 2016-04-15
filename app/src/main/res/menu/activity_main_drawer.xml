@@ -10,6 +10,11 @@
             android:id="@+id/nav_half_swipe"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Half Swipe" />
+
+        <item
+            android:id="@+id/nav_two_step_swipe"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Two Step Swipe" />
     </group>
 
     <item android:title="Communicate">

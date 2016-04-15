@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<apps.xenione.com.swipelayout.example.swipe.TwoStepRightCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageButton
+    <LinearLayout
         android:id="@+id/backgroundView"
-        android:background="@color/colorAccent"
-        android:src="@drawable/ic_delete"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:src="@drawable/ic_delete" />
+
+        <ImageButton
+            android:id="@+id/action"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorSecondaryAccent"
+            android:src="@drawable/ic_delete" />
+    </LinearLayout>
 
     <apps.xenione.com.swipelayout.lib.SwipeLayout
         android:id="@+id/foregroundView"
@@ -54,4 +68,4 @@
 
     </apps.xenione.com.swipelayout.lib.SwipeLayout>
 
-</apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>
+</apps.xenione.com.swipelayout.example.swipe.TwoStepRightCoordinatorLayout>
