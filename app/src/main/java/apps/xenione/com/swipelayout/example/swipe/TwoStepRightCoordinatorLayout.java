@@ -2,10 +2,13 @@ package apps.xenione.com.swipelayout.example.swipe;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Build;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.lib.AbsCoordinatorLayout;
@@ -15,6 +18,8 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
  * Created on 06/04/16.
  */
 public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+
+    private ImageView mBg;
 
     public interface OnDismissListener {
         void onDismissed();
@@ -58,6 +63,7 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implemen
     protected void onFinishInflate() {
         super.onFinishInflate();
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
+        mBg=(ImageView)findViewById(R.id.bg_disc);
         mDelete = findViewById(R.id.delete);
         mAction = findViewById(R.id.action);
     }
@@ -70,5 +76,10 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implemen
 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
+        if (index == 0) {
+            mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
+        } else if (index == 1) {
+            mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
+        }
     }
 }
