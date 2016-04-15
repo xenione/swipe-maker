@@ -55,8 +55,8 @@ public class RightCoordinatorLayout extends AbsCoordinatorLayout implements Swip
     }
 
     @Override
-    public void onTranslateChange(float percent) {
-        if (percent == 1) {
+    public void onTranslateChange(float global, int index, float relative) {
+        if (global == 1) {
             mOnDismissListener.onDismissed();
         }
     }

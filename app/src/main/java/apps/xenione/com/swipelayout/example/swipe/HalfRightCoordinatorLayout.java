@@ -77,6 +77,6 @@ public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements 
     }
 
     @Override
-    public void onTranslateChange(float percent) {
+    public void onTranslateChange(float global, int index, float relative) {
     }
 }

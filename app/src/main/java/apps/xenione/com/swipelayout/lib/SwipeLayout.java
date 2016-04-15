@@ -16,12 +16,12 @@ import java.util.Arrays;
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class SwipeLayout extends FrameLayout implements Runnable{
+public class SwipeLayout extends FrameLayout implements Runnable {
 
     private static final String TAG = "SwipeLayout";
 
     public interface OnTranslateChangeListener {
-        void onTranslateChange(float percent);
+        void onTranslateChange(float globalPercent, int index, float relativePercent);
     }
 
     private int mTouchSlop;
@@ -30,6 +30,14 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     private boolean mIsDragging = false;
     private Anchor mAnchors;
     private OnTranslateChangeListener mOnTranslateChangeListener;
+    private PositionInfo positionInfo;
+
+    private class PositionInfo{
+        public int currX;
+        public int index;
+        public float relative;
+        public float global;
+    }
 
     public SwipeLayout(Context context) {
         this(context, null);
@@ -53,6 +61,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     private void init() {
         mTouchSlop = ViewConfiguration.get(this.getContext()).getScaledTouchSlop();
         mHelperScroller = new ScrollerHelper(this.getContext());
+        positionInfo = new PositionInfo();
     }
 
     public void anchor(Integer... points) {
@@ -159,13 +168,14 @@ public class SwipeLayout extends FrameLayout implements Runnable{
         if (getTranslationX() == croppedX) {
             return;
         }
-        setDeltaX(croppedX);
-        notifyListener(croppedX);
+        mAnchors.closeTo(positionInfo, croppedX);
+        setDeltaX(positionInfo.currX);
+        notifyListener(positionInfo);
     }
 
-    private void notifyListener(int desX) {
+    private void notifyListener(PositionInfo position) {
         if (mOnTranslateChangeListener != null) {
-            mOnTranslateChangeListener.onTranslateChange((float) desX / (mAnchors.getSupLimit() - mAnchors.getInfLimit()));
+            mOnTranslateChangeListener.onTranslateChange(position.global, position.index, position.relative);
         }
     }
 
@@ -182,7 +192,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     }
 
     private int ensureInsideBounds(int x) {
-        return mAnchors.cropInLimts(x);
+        return mAnchors.cropInLimits(x);
     }
 
     public static class Anchor {
@@ -196,12 +206,45 @@ public class SwipeLayout extends FrameLayout implements Runnable{
             this.anchors = anchors;
         }
 
-        public int getSupLimit(){
-            return anchors[anchors.length-1];
+        public int getSupLimit() {
+            return anchors[anchors.length - 1];
         }
 
-        public int getInfLimit(){
+        public int getInfLimit() {
             return anchors[0];
+        }
+
+        public float getGlobalPercent(int x) {
+            return getPercent(x, getSupLimit(), getInfLimit());
+        }
+
+        private float getPercent(int x, int limitSup, int limitInf) {
+            return (float) x / (limitSup - limitInf);
+        }
+
+        private void closeTo(PositionInfo position, int point) {
+            if (position.currX == point) {
+                return;
+            }
+            int newIndex = position.index;
+            if ((position.currX - point) > 0 && (point < anchors[position.index])) {
+                newIndex = --position.index;
+            } else if (point > anchors[position.index + 1]) {
+                newIndex = ++position.index;
+            }
+            position.index = newIndex;
+            position.currX = point;
+            position.relative = getPercent(point, anchors[newIndex + 1], anchors[newIndex]);
+            position.global = getGlobalPercent(point);
+        }
+
+        private int getIndex(int point) {
+            for (int i = 1; i < anchors.length; i++) {
+                if (Math.abs(point - anchors[i]) > Math.abs(point - anchors[i - 1])) {
+                    return i - 1;
+                }
+            }
+            return anchors.length - 1;
         }
 
         private int closeTo(int point) {
@@ -212,7 +255,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
             }
             return anchors[anchors.length - 1];
         }
-        public int cropInLimts(int x) {
+        public int cropInLimits(int x) {
             int inBounds = x;
             if (x < getInfLimit()) {
                 inBounds = getInfLimit();
@@ -221,7 +264,5 @@ public class SwipeLayout extends FrameLayout implements Runnable{
             }
             return inBounds;
         }
-
-
     }
 }
