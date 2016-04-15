@@ -28,9 +28,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     private ScrollerHelper mHelperScroller;
     private int mLastTouchX;
     private boolean mIsDragging = false;
-    private int mSupLimit;
-    private int mInfLimit;
-    private Integer[] mAnchors;
+    private Anchor mAnchors;
     private OnTranslateChangeListener mOnTranslateChangeListener;
 
     public SwipeLayout(Context context) {
@@ -57,35 +55,8 @@ public class SwipeLayout extends FrameLayout implements Runnable{
         mHelperScroller = new ScrollerHelper(this.getContext());
     }
 
-
     public void anchor(Integer... points) {
-        if (points.length < 2) {
-            throw new IllegalArgumentException("Amount of anchor points provided to SwipeLayout have to be bigger than 2");
-        }
-
-
-        Arrays.sort(points);
-        mAnchors = points;
-
-        setLeftLimit(mAnchors[0]);
-        setRightLimit(points[mAnchors.length - 1]);
-
-
-
-
-
-
-
-
-
-    }
-
-    private void setRightLimit(int rightLimit) {
-        mSupLimit = rightLimit;
-    }
-
-    private void setLeftLimit(int leftLimit) {
-        mInfLimit = leftLimit;
+        mAnchors = new Anchor(points);
     }
 
     public void setOnTranslateChangeListener(OnTranslateChangeListener listener) {
@@ -180,16 +151,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     }
 
     private int calculateEndX(int currX) {
-        return closeTo(currX);
-    }
-
-    private int closeTo(int point) {
-        for (int i = 1; i < mAnchors.length; i++) {
-            if (Math.abs(point - mAnchors[i]) > Math.abs(point - mAnchors[i - 1])) {
-                return mAnchors[i - 1];
-            }
-        }
-        return mAnchors[mAnchors.length - 1];
+        return mAnchors.closeTo(currX);
     }
 
     public void translateTo(int x) {
@@ -203,7 +165,7 @@ public class SwipeLayout extends FrameLayout implements Runnable{
 
     private void notifyListener(int desX) {
         if (mOnTranslateChangeListener != null) {
-            mOnTranslateChangeListener.onTranslateChange((float) desX / (mSupLimit - mInfLimit));
+            mOnTranslateChangeListener.onTranslateChange((float) desX / (mAnchors.getSupLimit() - mAnchors.getInfLimit()));
         }
     }
 
@@ -220,12 +182,46 @@ public class SwipeLayout extends FrameLayout implements Runnable{
     }
 
     private int ensureInsideBounds(int x) {
-        int inBounds = x;
-        if (x < mInfLimit) {
-            inBounds = mInfLimit;
-        } else if (x > mSupLimit) {
-            inBounds = mSupLimit;
+        return mAnchors.cropInLimts(x);
+    }
+
+    public static class Anchor {
+        private Integer[] anchors;
+
+        public Anchor(Integer[] anchors) {
+            if (anchors.length < 2) {
+                throw new IllegalArgumentException("Amount of anchor points provided to SwipeLayout have to be bigger than 2");
+            }
+            Arrays.sort(anchors);
+            this.anchors = anchors;
         }
-        return inBounds;
+
+        public int getSupLimit(){
+            return anchors[anchors.length-1];
+        }
+
+        public int getInfLimit(){
+            return anchors[0];
+        }
+
+        private int closeTo(int point) {
+            for (int i = 1; i < anchors.length; i++) {
+                if (Math.abs(point - anchors[i]) > Math.abs(point - anchors[i - 1])) {
+                    return anchors[i - 1];
+                }
+            }
+            return anchors[anchors.length - 1];
+        }
+        public int cropInLimts(int x) {
+            int inBounds = x;
+            if (x < getInfLimit()) {
+                inBounds = getInfLimit();
+            } else if (x > getSupLimit()) {
+                inBounds = getSupLimit();
+            }
+            return inBounds;
+        }
+
+
     }
 }
