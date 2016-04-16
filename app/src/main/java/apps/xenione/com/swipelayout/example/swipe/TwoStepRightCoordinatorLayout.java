@@ -77,8 +77,12 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implemen
     @Override
     public void onTranslateChange(float global, int index, float relative) {
         if (index == 0) {
-            mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
-        } else if (index == 1) {
+            if (relative == 0) {
+                mBg.clearColorFilter();
+            } else {
+                mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
+            }
+        } else if (index == 1 && relative > 0) {
             mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
         }
     }
