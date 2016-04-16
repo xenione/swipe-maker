@@ -30,5 +30,5 @@
         <item name="android:alpha">0.80</item>
         <item name="android:padding">5dp</item>
     </style>
-    
+
 </resources>
