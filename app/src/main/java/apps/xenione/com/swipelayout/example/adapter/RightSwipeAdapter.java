@@ -13,7 +13,6 @@ import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
-import apps.xenione.com.swipelayout.lib.AbsCoordinatorLayout;
 import apps.xenione.com.swipelayout.example.swipe.RightCoordinatorLayout;
 
 /**
@@ -70,7 +69,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         mOnItemDismissListener = listener;
     }
 
-    public class OnItemDismiss implements AbsCoordinatorLayout.OnDismissListener {
+    public class OnItemDismiss implements RightCoordinatorLayout.OnDismissListener {
 
         private int position;
 

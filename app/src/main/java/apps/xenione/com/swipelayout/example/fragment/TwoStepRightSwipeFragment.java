@@ -30,7 +30,7 @@ public class TwoStepRightSwipeFragment extends Fragment implements TwoStepRightS
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_two_step_right_swipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_swipe, container, false);
         initRecyclerView(view);
         return view;
     }

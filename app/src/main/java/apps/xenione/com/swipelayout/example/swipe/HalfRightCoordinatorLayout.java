@@ -3,7 +3,6 @@ package apps.xenione.com.swipelayout.example.swipe;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -64,12 +63,6 @@ public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements 
                 mOnDismissListener.onDismissed();
             }
         });
-    }
-
-    public void init() {
-        if (!isInEditMode()) {
-            ViewCompat.postOnAnimation(this, initializeViews);
-        }
     }
 
     public void setOnDismissListener(OnDismissListener listener) {

@@ -3,7 +3,6 @@ package apps.xenione.com.swipelayout.example.swipe;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,20 +15,9 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
  */
 public class BothSideCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
 
-    public interface OnDismissListener {
-        void onDismissed();
-    }
-
     private View mDelete;
     private View mAction;
     private SwipeLayout mForegroundView;
-
-    public Runnable initializeViews = new Runnable() {
-        @Override
-        public void run() {
-            mForegroundView.translateTo(0);
-        }
-    };
 
     public BothSideCoordinatorLayout(Context context) {
         super(context);
@@ -59,12 +47,6 @@ public class BothSideCoordinatorLayout extends AbsCoordinatorLayout implements S
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mDelete = findViewById(R.id.delete);
         mAction = findViewById(R.id.action);
-    }
-
-    public void init() {
-        if (!isInEditMode()) {
-            ViewCompat.postOnAnimation(this, initializeViews);
-        }
     }
 
     @Override

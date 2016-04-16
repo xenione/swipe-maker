@@ -2,10 +2,12 @@ package apps.xenione.com.swipelayout.example.swipe;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Build;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,22 +22,29 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
 
     private ImageView mBg;
-
-    public interface OnDismissListener {
-        void onDismissed();
-    }
-
     private View mDelete;
     private View mAction;
     private SwipeLayout mForegroundView;
-    private OnDismissListener mOnDismissListener;
 
-    public Runnable initializeViews = new Runnable() {
-        @Override
-        public void run() {
-            mForegroundView.translateTo(0);
+    public enum Color {
+        PINK(R.color.colorAccent),
+        BLUE(R.color.colorSecondaryAccent);
+
+        private int resId;
+        private ColorFilter color;
+
+        Color(int resId) {
+            this.resId = resId;
         }
-    };
+
+        public ColorFilter getColor(Context context) {
+            if (color == null) {
+                color = new PorterDuffColorFilter(
+                        ResourcesCompat.getColor(context.getResources(), resId, context.getTheme()), PorterDuff.Mode.MULTIPLY);
+            }
+            return color;
+        }
+    }
 
     public TwoStepRightCoordinatorLayout(Context context) {
         super(context);
@@ -68,22 +77,27 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implemen
         mAction = findViewById(R.id.action);
     }
 
-    public void init() {
-        if (!isInEditMode()) {
-            ViewCompat.postOnAnimation(this, initializeViews);
-        }
-    }
-
     @Override
     public void onTranslateChange(float global, int index, float relative) {
         if (index == 0) {
             if (relative == 0) {
-                mBg.clearColorFilter();
+                removeColorFilter();
             } else {
-                mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
+                applyColorFilter(Color.PINK);
             }
         } else if (index == 1 && relative > 0) {
-            mBg.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryAccent, getContext().getTheme()), PorterDuff.Mode.MULTIPLY);
+            applyColorFilter(Color.BLUE);
         }
+    }
+
+    private void removeColorFilter(){
+        mBg.clearColorFilter();
+    }
+
+    private void applyColorFilter(Color color) {
+        if (DrawableCompat.getColorFilter(mBg.getDrawable()) == color.getColor(getContext())) {
+            return;
+        }
+        mBg.setColorFilter(color.getColor(getContext()));
     }
 }

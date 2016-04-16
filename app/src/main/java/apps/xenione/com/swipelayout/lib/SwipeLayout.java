@@ -12,8 +12,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 
-import java.util.Arrays;
-
 /**
  * Created by Eugeni on 10/04/2016.
  */

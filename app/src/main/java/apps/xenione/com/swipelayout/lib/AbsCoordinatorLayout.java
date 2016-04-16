@@ -14,10 +14,6 @@ import apps.xenione.com.swipelayout.R;
  */
 public abstract class AbsCoordinatorLayout extends FrameLayout implements SwipeLayout.OnTranslateChangeListener {
 
-    public interface OnDismissListener {
-        void onDismissed();
-    }
-
     private SwipeLayout mForegroundView;
 
     public Runnable initializeViews = new Runnable() {

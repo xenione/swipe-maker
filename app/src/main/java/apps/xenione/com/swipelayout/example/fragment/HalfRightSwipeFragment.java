@@ -30,7 +30,7 @@ public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAd
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_half_right_swipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_swipe, container, false);
         initRecyclerView(view);
         return view;
     }

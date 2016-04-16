@@ -15,10 +15,13 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
  */
 public class RightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
 
+    public interface OnDismissListener {
+        void onDismissed();
+    }
+
     private View mBackgroundView;
     private SwipeLayout mForegroundView;
     private OnDismissListener mOnDismissListener;
-
 
     public RightCoordinatorLayout(Context context) {
         super(context);
@@ -36,7 +39,6 @@ public class RightCoordinatorLayout extends AbsCoordinatorLayout implements Swip
     public RightCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
 
     @Override
     public void doInitialViewsLocation() {
