@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/colorSecondaryAccent"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/ic_action" />
     </LinearLayout>
 
     <apps.xenione.com.swipelayout.lib.SwipeLayout

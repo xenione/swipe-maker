@@ -26,8 +26,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:background="@color/colorSecondaryAccent"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/ic_action"
+            android:background="@color/colorSecondaryAccent" />
     </RelativeLayout>
 
     <apps.xenione.com.swipelayout.lib.SwipeLayout
