@@ -8,8 +8,8 @@ android {
         applicationId "apps.xenione.com.swipelayout"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 100
-        versionName "1.0.0"
+        versionCode 101
+        versionName "1.0.1"
     }
     buildTypes {
         release {

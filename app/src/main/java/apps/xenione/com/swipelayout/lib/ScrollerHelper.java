@@ -21,7 +21,6 @@ public class ScrollerHelper {
             return;
         }
         int deltaX = endX - startX;
-        startX += deltaX > 0 ? 1 : -1;
         mScroller.startScroll(startX, 0, deltaX, SCROLL_ANIMATION_DURATION);
     }
 
