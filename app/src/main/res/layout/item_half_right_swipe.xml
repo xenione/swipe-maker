@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/backgroundView"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <apps.xenione.com.swipelayout.lib.SwipeLayout
+        android:id="@+id/foregroundView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bg_disc"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                style="@style/SubTitleTextStyle"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Sao"
+                android:layout_below="@+id/bandName"
+                android:layout_alignRight="@+id/bandName"
+                android:layout_alignEnd="@+id/bandName" />
+
+            <TextView
+                style="@style/TitleTextStyle"
+                android:id="@+id/bandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="La Gossa Sorda"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp" />
+
+        </RelativeLayout>
+
+    </apps.xenione.com.swipelayout.lib.SwipeLayout>
+
+</apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>
