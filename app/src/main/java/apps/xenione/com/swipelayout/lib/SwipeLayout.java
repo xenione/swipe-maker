@@ -143,6 +143,7 @@ public class SwipeLayout extends FrameLayout implements Runnable {
                 mIsDragging = deltaX > mTouchSlop;
                 if (mIsDragging) {
                     disallowParentInterceptTouchEvent(true);
+                    mLastTouchX = (int) ev.getX();
                 }
                 return mIsDragging;
             }
@@ -173,6 +174,7 @@ public class SwipeLayout extends FrameLayout implements Runnable {
                     translateBy(deltaX);
                 } else if (Math.abs(deltaX) > mTouchSlop) {
                     disallowParentInterceptTouchEvent(true);
+                    mLastTouchX = (int) event.getX();
                     mIsDragging = true;
                 }
                 break;
