@@ -24,9 +24,14 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         void onItemDismissed(int position);
     }
 
+    public interface OnItemSelectListener {
+        void onItemSelected(int position);
+    }
+
     private List<Album> mAlbums;
     private Context context;
     private OnItemDismissListener mOnItemDismissListener;
+    private OnItemSelectListener mOnItemSelectListener;
 
     public RightSwipeAdapter(Context context, List<Album> albums) {
         this.context = context;
@@ -42,6 +47,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
         holder.coordinatorLayout.sync();
+        holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
         holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
@@ -69,6 +75,10 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         mOnItemDismissListener = listener;
     }
 
+    public void setOnItemItemSelectListener(OnItemSelectListener listener) {
+        mOnItemSelectListener = listener;
+    }
+
     public class OnItemDismiss implements RightCoordinatorLayout.OnDismissListener {
 
         private int position;
@@ -79,7 +89,25 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
 
         @Override
         public void onDismissed() {
-            mOnItemDismissListener.onItemDismissed(position);
+            if (mOnItemDismissListener != null) {
+                mOnItemDismissListener.onItemDismissed(position);
+            }
+        }
+    }
+
+    private class OnItemSelectedClick implements View.OnClickListener{
+
+        private int position;
+
+        public OnItemSelectedClick(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mOnItemDismissListener != null) {
+                mOnItemSelectListener.onItemSelected(position);
+            }
         }
     }
 
@@ -88,6 +116,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         public TextView title;
         public TextView bandName;
         public ImageView discImage;
+        public View foreground;
         public RightCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
@@ -96,6 +125,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
+            foreground= view.findViewById(R.id.foregroundView);
         }
     }
 }
