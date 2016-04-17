@@ -51,12 +51,12 @@ public class SwipeLayout extends FrameLayout implements Runnable {
             section++;
         }
 
-        public boolean moveToRight(int newX) {
-            return newX > currX;
+        public boolean moveToLeft(int newX) {
+            return currX > newX;
         }
 
         private void updateSection(int newX){
-            if (moveToRight(newX) && (newX <= anchors.anchorFor(mPositionInfo.section))) {
+            if (moveToLeft(newX) && (newX <= anchors.anchorFor(mPositionInfo.section))) {
                 decSection();
             } else if (newX > anchors.anchorFor(mPositionInfo.section + 1)) {
                 incSection();
@@ -227,7 +227,6 @@ public class SwipeLayout extends FrameLayout implements Runnable {
         mPositionInfo.updatePosition(newX);
         notifyListener();
     }
-
 
     private void notifyListener() {
         if (mOnTranslateChangeListener != null) {
