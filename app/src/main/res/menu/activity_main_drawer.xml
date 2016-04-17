@@ -25,6 +25,10 @@
             android:id="@+id/nav_right_drag_swipe"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Right Drag Swipe" />
+        <item
+            android:id="@+id/nav_right_drag_friction_swipe"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Right Drag Friction Swipe" />
 
     </group>
 

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.fragment.BothSideSwipeFragment;
+import apps.xenione.com.swipelayout.example.fragment.HalfRightDragFrictionSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.HalfRightDragSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.HalfRightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.RightSwipeFragment;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         showFragment(RightSwipeFragment.newInstance(), RightSwipeFragment.TAG);
+        navigationView.setCheckedItem(R.id.nav_rightswipe);
     }
 
     @Override
@@ -65,8 +67,10 @@ public class MainActivity extends AppCompatActivity
             showFragment(TwoStepRightSwipeFragment.newInstance(), TwoStepRightSwipeFragment.TAG);
         } else if (id == R.id.nav_both_side_swipe) {
             showFragment(BothSideSwipeFragment.newInstance(), BothSideSwipeFragment.TAG);
-        } else if(id==R.id.nav_right_drag_swipe){
+        } else if (id == R.id.nav_right_drag_swipe) {
             showFragment(HalfRightDragSwipeFragment.newInstance(), HalfRightDragSwipeFragment.TAG);
+        } else if (id == R.id.nav_right_drag_friction_swipe) {
+            showFragment(HalfRightDragFrictionSwipeFragment.newInstance(), HalfRightDragFrictionSwipeFragment.TAG);
         } else if (id == R.id.nav_share) {
             launchSharer();
         }

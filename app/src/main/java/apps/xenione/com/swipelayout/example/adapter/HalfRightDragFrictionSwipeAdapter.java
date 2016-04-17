@@ -13,12 +13,12 @@ import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
-import apps.xenione.com.swipelayout.example.swipe.HalfRightDragCoordinatorLayout;
+import apps.xenione.com.swipelayout.example.swipe.HalfRightDragFrictionCoordinatorLayout;
 
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDragSwipeAdapter.ViewHolder> {
+public class HalfRightDragFrictionSwipeAdapter extends RecyclerView.Adapter<HalfRightDragFrictionSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
         void onItemDismissed(int position);
@@ -28,14 +28,14 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
     private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public HalfRightDragSwipeAdapter(Context context, List<Album> albums) {
+    public HalfRightDragFrictionSwipeAdapter(Context context, List<Album> albums) {
         this.context = context;
         this.mAlbums = albums;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_right_drag_swipe, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_right_drag_friction_swipe, parent, false));
     }
 
     @Override
@@ -90,11 +90,11 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
         public TextView bandName;
         public ImageView discImage;
         public View delete;
-        public HalfRightDragCoordinatorLayout coordinatorLayout;
+        public HalfRightDragFrictionCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
-            coordinatorLayout = (HalfRightDragCoordinatorLayout) view;
+            coordinatorLayout = (HalfRightDragFrictionCoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
