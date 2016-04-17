@@ -1,5 +1,6 @@
 package apps.xenione.com.swipelayout.example;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -64,12 +65,10 @@ public class MainActivity extends AppCompatActivity
             showFragment(TwoStepRightSwipeFragment.newInstance(), TwoStepRightSwipeFragment.TAG);
         } else if (id == R.id.nav_both_side_swipe) {
             showFragment(BothSideSwipeFragment.newInstance(), BothSideSwipeFragment.TAG);
-        } else if(id==R.id.nav_right_next_swipe){
+        } else if(id==R.id.nav_right_drag_swipe){
             showFragment(HalfRightDragSwipeFragment.newInstance(), HalfRightDragSwipeFragment.TAG);
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            launchSharer();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -86,5 +85,13 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction tr = fm.beginTransaction();
         tr.replace(R.id.fragment_container, fragment, tag)
                 .commit();
+    }
+
+    private void launchSharer() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I found on google play that awesome swipe library. Have a look !!! ");
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
 }

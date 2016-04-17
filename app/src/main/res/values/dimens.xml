@@ -8,4 +8,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_height">250dp</dimen>
     <dimen name="button_padding">13dp</dimen>
+    <dimen name="profile_size">75dp</dimen>
 </resources>

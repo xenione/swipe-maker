@@ -22,9 +22,9 @@
             android:title="Both Side Swipe" />
 
         <item
-            android:id="@+id/nav_right_next_swipe"
+            android:id="@+id/nav_right_drag_swipe"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Both Side Swipe" />
+            android:title="Right Drag Swipe" />
 
     </group>
 
@@ -34,10 +34,6 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
         </menu>
     </item>
 
