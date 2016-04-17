@@ -44,7 +44,7 @@ public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
-        holder.coordinatorLayout.init();
+        holder.coordinatorLayout.sync();
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
         holder.discImage.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme()));

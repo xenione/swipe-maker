@@ -13,12 +13,12 @@ import java.util.List;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
-import apps.xenione.com.swipelayout.example.swipe.RightCoordinatorLayout;
+import apps.xenione.com.swipelayout.example.swipe.HalfRightDragCoordinatorLayout;
 
 /**
  * Created by Eugeni on 10/04/2016.
  */
-public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.ViewHolder> {
+public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDragSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
         void onItemDismissed(int position);
@@ -28,23 +28,24 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public RightSwipeAdapter(Context context, List<Album> albums) {
+    public HalfRightDragSwipeAdapter(Context context, List<Album> albums) {
         this.context = context;
         this.mAlbums = albums;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_right_swipe, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_right_next_swipe, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
         holder.coordinatorLayout.sync();
-        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
+        holder.coordinatorLayout.setOnClickListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
+        holder.delete.setOnClickListener(new OnItemDismiss(position));
         ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme());
         holder.discImage.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme()));
     }
@@ -69,7 +70,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         mOnItemDismissListener = listener;
     }
 
-    public class OnItemDismiss implements RightCoordinatorLayout.OnDismissListener {
+    public class OnItemDismiss implements View.OnClickListener {
 
         private int position;
 
@@ -78,7 +79,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         }
 
         @Override
-        public void onDismissed() {
+        public void onClick(View v) {
             mOnItemDismissListener.onItemDismissed(position);
         }
     }
@@ -88,14 +89,16 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         public TextView title;
         public TextView bandName;
         public ImageView discImage;
-        public RightCoordinatorLayout coordinatorLayout;
+        public View delete;
+        public HalfRightDragCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
-            coordinatorLayout = (RightCoordinatorLayout) view;
+            coordinatorLayout = (HalfRightDragCoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
+            delete= view.findViewById(R.id.backgroundView);
         }
     }
 }

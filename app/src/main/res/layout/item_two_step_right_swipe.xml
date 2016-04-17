@@ -15,12 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/colorAccent"
+            android:padding="@dimen/button_padding"
             android:src="@drawable/ic_delete" />
 
         <ImageButton
             android:id="@+id/action"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:padding="@dimen/button_padding"
             android:background="@color/colorSecondaryAccent"
             android:src="@drawable/ic_action" />
     </LinearLayout>

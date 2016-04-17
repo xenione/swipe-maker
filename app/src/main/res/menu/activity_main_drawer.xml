@@ -21,6 +21,11 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Both Side Swipe" />
 
+        <item
+            android:id="@+id/nav_right_next_swipe"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Both Side Swipe" />
+
     </group>
 
     <item android:title="Communicate">

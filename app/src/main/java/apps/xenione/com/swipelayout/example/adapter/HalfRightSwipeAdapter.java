@@ -41,10 +41,11 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
-        holder.coordinatorLayout.init();
-        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
+        holder.coordinatorLayout.sync();
+        holder.coordinatorLayout.setOnClickListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
+        holder.delete.setOnClickListener(new OnItemDismiss(position));
         ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme());
         holder.discImage.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme()));
     }
@@ -69,7 +70,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         mOnItemDismissListener = listener;
     }
 
-    public class OnItemDismiss implements HalfRightCoordinatorLayout.OnDismissListener {
+    public class OnItemDismiss implements View.OnClickListener {
 
         private int position;
 
@@ -78,7 +79,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         }
 
         @Override
-        public void onDismissed() {
+        public void onClick(View v) {
             mOnItemDismissListener.onItemDismissed(position);
         }
     }
@@ -88,6 +89,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         public TextView title;
         public TextView bandName;
         public ImageView discImage;
+        public View delete;
         public HalfRightCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
@@ -96,6 +98,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
             title = (TextView) view.findViewById(R.id.title);
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
+            delete= view.findViewById(R.id.backgroundView);
         }
     }
 }

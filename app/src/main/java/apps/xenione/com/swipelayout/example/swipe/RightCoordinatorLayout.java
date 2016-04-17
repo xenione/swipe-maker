@@ -58,6 +58,8 @@ public class RightCoordinatorLayout extends AbsCoordinatorLayout implements Swip
 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
+        mBackgroundView.setAlpha(global);
+        mForegroundView.setAlpha(1 - global);
         if (global == 1) {
             mOnDismissListener.onDismissed();
         }

@@ -13,7 +13,7 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 /**
  * Created on 06/04/16.
  */
-public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+public class HalfRightDragCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
 
     private View mBackgroundView;
     private SwipeLayout mForegroundView;
@@ -25,20 +25,20 @@ public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements 
         }
     };
 
-    public HalfRightCoordinatorLayout(Context context) {
+    public HalfRightDragCoordinatorLayout(Context context) {
         super(context);
     }
 
-    public HalfRightCoordinatorLayout(Context context, AttributeSet attrs) {
+    public HalfRightDragCoordinatorLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public HalfRightCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HalfRightDragCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public HalfRightCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public HalfRightDragCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -56,5 +56,6 @@ public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout implements 
 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
+        mBackgroundView.setTranslationX((global - 1) * mBackgroundView.getWidth());
     }
 }
