@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity
     private void launchSharer() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I found on google play that awesome swipe library. Have a look !!! ");
-        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I found on google play that awesome swipe library at https://github.com/xenione/SwipeLayout. Have a look !!! ");
+        sendIntent.setType("text/html");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
 }
