@@ -155,7 +155,7 @@ public class SwipeLayout extends FrameLayout implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if(!mIsDragging){
+        if (!mIsDragging) {
             super.onTouchEvent(event);
         }
 

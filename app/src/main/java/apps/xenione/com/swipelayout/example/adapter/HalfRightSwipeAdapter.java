@@ -24,12 +24,15 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         void onItemDismissed(int position);
     }
 
-    private List<Album> mAlbums;
-    private Context context;
-    private OnItemDismissListener mOnItemDismissListener;
+    public interface OnItemSelectListener {
+        void onItemSelected(int position);
+    }
 
-    public HalfRightSwipeAdapter(Context context, List<Album> albums) {
-        this.context = context;
+    private List<Album> mAlbums;
+    private OnItemDismissListener mOnItemDismissListener;
+    private OnItemSelectListener mOnItemSelectListener;
+
+    public HalfRightSwipeAdapter(List<Album> albums) {
         this.mAlbums = albums;
     }
 
@@ -40,9 +43,10 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Context context = holder.itemView.getContext();
         Album album = getItem(position);
         holder.coordinatorLayout.sync();
-        holder.coordinatorLayout.setOnClickListener(new OnItemDismiss(position));
+        holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
         holder.delete.setOnClickListener(new OnItemDismiss(position));
@@ -70,6 +74,10 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         mOnItemDismissListener = listener;
     }
 
+    public void setOnItemItemSelectListener(OnItemSelectListener listener) {
+        mOnItemSelectListener = listener;
+    }
+
     public class OnItemDismiss implements View.OnClickListener {
 
         private int position;
@@ -80,7 +88,25 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
 
         @Override
         public void onClick(View v) {
-            mOnItemDismissListener.onItemDismissed(position);
+            if (mOnItemDismissListener != null) {
+                mOnItemDismissListener.onItemDismissed(position);
+            }
+        }
+    }
+
+    private class OnItemSelectedClick implements View.OnClickListener{
+
+        private int position;
+
+        public OnItemSelectedClick(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mOnItemSelectListener != null) {
+                mOnItemSelectListener.onItemSelected(position);
+            }
         }
     }
 
@@ -91,6 +117,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         public ImageView discImage;
         public View delete;
         public HalfRightCoordinatorLayout coordinatorLayout;
+        public View foreground;
 
         public ViewHolder(View view) {
             super(view);
@@ -99,6 +126,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
             bandName = (TextView) view.findViewById(R.id.bandName);
             discImage = (ImageView) view.findViewById(R.id.bg_disc);
             delete= view.findViewById(R.id.backgroundView);
+            foreground= view.findViewById(R.id.foregroundView);
         }
     }
 }

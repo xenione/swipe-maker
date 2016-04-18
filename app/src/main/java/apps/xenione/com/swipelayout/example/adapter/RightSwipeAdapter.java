@@ -29,12 +29,10 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     }
 
     private List<Album> mAlbums;
-    private Context context;
     private OnItemDismissListener mOnItemDismissListener;
     private OnItemSelectListener mOnItemSelectListener;
 
-    public RightSwipeAdapter(Context context, List<Album> albums) {
-        this.context = context;
+    public RightSwipeAdapter(List<Album> albums) {
         this.mAlbums = albums;
     }
 
@@ -45,6 +43,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Context context = holder.itemView.getContext();
         Album album = getItem(position);
         holder.coordinatorLayout.sync();
         holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
@@ -119,7 +118,7 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         public View foreground;
         public RightCoordinatorLayout coordinatorLayout;
 
-        public ViewHolder(View view) {
+        public ViewHolder(final View view) {
             super(view);
             coordinatorLayout = (RightCoordinatorLayout) view;
             title = (TextView) view.findViewById(R.id.title);

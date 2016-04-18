@@ -17,7 +17,7 @@ import apps.xenione.com.swipelayout.example.data.Album;
 /**
  * Created by Eugeni on 13/04/2016.
  */
-public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAdapter.OnItemDismissListener {
+public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAdapter.OnItemDismissListener, HalfRightSwipeAdapter.OnItemSelectListener {
 
     public static final String TAG = "HalfRightSwipeFragment";
 
@@ -40,8 +40,9 @@ public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAd
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new HalfRightSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new HalfRightSwipeAdapter(Album.getAlbum());
         mAdapter.setOnItemDismissListener(this);
+        mAdapter.setOnItemItemSelectListener(this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -49,5 +50,11 @@ public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAd
     public void onItemDismissed(int position) {
         mAdapter.deleteItem(position);
         Toast.makeText(getContext(), "item deleted at position :" + position, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemSelected(int position) {
+        Toast.makeText(getContext(), "item selected at position :" + position, Toast.LENGTH_LONG).show();
+
     }
 }

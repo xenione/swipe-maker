@@ -40,7 +40,7 @@ public class RightSwipeFragment extends Fragment implements RightSwipeAdapter.On
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RightSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new RightSwipeAdapter(Album.getAlbum());
         mAdapter.setOnItemDismissListener(this);
         mAdapter.setOnItemItemSelectListener(this);
         recyclerView.setAdapter(mAdapter);
@@ -49,11 +49,11 @@ public class RightSwipeFragment extends Fragment implements RightSwipeAdapter.On
     @Override
     public void onItemDismissed(int position) {
         mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item deleted at position :" + position, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "item deleted at position : " + position, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onItemSelected(int position) {
-        Toast.makeText(getContext(), "item selected at position :" + position, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "item selected at position : " + position, Toast.LENGTH_LONG).show();
     }
 }
