@@ -112,6 +112,7 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
     public void onTranslateChange(float global, int index, float relative) {
     }
 ```
+
 where be can keep aware of swipe progress
 global: give has percent(1% 0-1) :0 means left limit and 1 means right limit.
 
@@ -122,7 +123,7 @@ index: is the index of the secction (if we have 3 anchor points we have 2 sectio
 relative: gives us the precent(1% 0-1) within the index section.
     
 In our case we have only one section so we don't have to take care about that.
-so lets add a nice transition:
+so lets add a nice transition effect:
     
     ```java 
     @Override
