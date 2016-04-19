@@ -7,11 +7,11 @@ Have a look at demos app available on google play: <https://play.google.com/stor
 
 ![both_side_swipe](https://cloud.githubusercontent.com/assets/4138527/14615552/8428c3e2-05a6-11e6-8b85-4627a6c79d87.gif)
 
-## Example of **Right Side Swipe **
+## Example of **Right Side Swipe**
 
 ![drag_swipe](https://cloud.githubusercontent.com/assets/4138527/14615553/8429c044-05a6-11e6-8d80-3d19d29e1a31.gif)
 
-## Example of **Right Two Steps Swipe** with amaizing color change
+## Example of **Right Two Steps Swipe** with amazing color change
 
 ![two_step_swipe](https://cloud.githubusercontent.com/assets/4138527/14615554/842ed408-05a6-11e6-8111-f11d91844031.gif)
 
@@ -21,14 +21,16 @@ Let's do it that one (Right Side Swipe):
 
 ![screenshoot](https://cloud.githubusercontent.com/assets/4138527/14615699/3c94e41a-05a7-11e6-8cca-4e97219d63b9.png)
 
-1. Extend AbsCoordinatorLayout and create your own Coordianator in this case HalfRightCoordinatorLayout
+
+
+1. Extend AbsCoordinatorLayout and create your own Coordianator in this case I called it HalfRightCoordinatorLayout
 
 ```java 
     public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout {
 ```
 
 Override method doInitialViewsLocation() hook when views are place on the screen and set anchors for the swipe widget.
-Anchor are the boundaries between swipe slides (look at layout next point). we want that swipe slide within button ( with id equal to background see next point for further clarification) boundaries.
+Anchor are the boundaries between swipe slides (look at layout next point). we want that swipe slide within button (mBackgroundView see next point for further clarification) boundaries.
 
 ```java 
     @Override
@@ -41,6 +43,7 @@ Anchor are the boundaries between swipe slides (look at layout next point). we w
 ```
 2. Make your layout according to the previous point
 Note: SwipeLayout id have to be *@+id/foregroundView*
+
 ```java
 <?xml version="1.0" encoding="utf-8"?>
 <apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -102,17 +105,20 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 </apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>;
 ```
 
-3. Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook  
+3. Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook called onTranslateChange(...)
+
 ```java 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
     }
     ```
-    where be can keep aware of swipe
+    where be can keep aware of swipe progress
     global: give has percent(1% 0-1) :0 means left limit and 1 means right limit.
-    index and relative: in case we have more than 1 section if we give 3 anchor points (like two steps swipe)
+    index and relative: in case we have more than 1 section that happend where we give more than 2 anchor points (like Two Steps Swipe)
     index: is the index of the secction (if we have 3 anchor points we have 2 sections: One from anchor 1 to 2 and the second secction from anchor 2 to 3)
     relative: gives us the precent(1% 0-1) within the index section.
+    
+    In our case we have only one section so we don't have to take care about that.
     so lets add a nice transition:
     ```java 
     @Override
