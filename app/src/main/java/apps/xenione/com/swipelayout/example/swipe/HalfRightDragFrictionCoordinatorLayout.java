@@ -13,17 +13,10 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 /**
  * Created on 06/04/16.
  */
-public class HalfRightDragFrictionCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+public class HalfRightDragFrictionCoordinatorLayout extends AbsCoordinatorLayout {
 
     private View mBackgroundView;
     private SwipeLayout mForegroundView;
-
-    public Runnable initializeViews = new Runnable() {
-        @Override
-        public void run() {
-            mForegroundView.translateTo(0);
-        }
-    };
 
     public HalfRightDragFrictionCoordinatorLayout(Context context) {
         super(context);
@@ -44,14 +37,9 @@ public class HalfRightDragFrictionCoordinatorLayout extends AbsCoordinatorLayout
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.anchor(mBackgroundView.getRight(), mBackgroundView.getLeft());
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mBackgroundView = findViewById(R.id.backgroundView);
+        mForegroundView.anchor(mBackgroundView.getRight(), mBackgroundView.getLeft());
     }
 
     @Override

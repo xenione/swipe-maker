@@ -13,7 +13,7 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 /**
  * Created on 06/04/16.
  */
-public class BothSideCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+public class BothSideCoordinatorLayout extends AbsCoordinatorLayout {
 
     private View mDelete;
     private View mAction;
@@ -38,15 +38,10 @@ public class BothSideCoordinatorLayout extends AbsCoordinatorLayout implements S
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.anchor(-mAction.getWidth(), 0, mDelete.getRight());
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mDelete = findViewById(R.id.delete);
         mAction = findViewById(R.id.action);
+        mForegroundView.anchor(-mAction.getWidth(), 0, mDelete.getRight());
     }
 
     @Override

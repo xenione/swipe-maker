@@ -13,7 +13,7 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 /**
  * Created on 06/04/16.
  */
-public class RightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+public class RightCoordinatorLayout extends AbsCoordinatorLayout {
 
     public interface OnDismissListener {
         void onDismissed();
@@ -42,14 +42,9 @@ public class RightCoordinatorLayout extends AbsCoordinatorLayout implements Swip
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.anchor(this.getRight(), this.getLeft());
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mBackgroundView = findViewById(R.id.backgroundView);
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
+        mForegroundView.anchor(this.getRight(), this.getLeft());
     }
 
     public void setOnDismissListener(OnDismissListener listener) {

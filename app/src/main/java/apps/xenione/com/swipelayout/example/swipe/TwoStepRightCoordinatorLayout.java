@@ -19,7 +19,7 @@ import apps.xenione.com.swipelayout.lib.SwipeLayout;
 /**
  * Created on 06/04/16.
  */
-public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implements SwipeLayout.OnTranslateChangeListener {
+public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout {
 
     private ImageView mBg;
     private View mDelete;
@@ -65,16 +65,11 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout implemen
 
     @Override
     public void doInitialViewsLocation() {
-        mForegroundView.anchor(0, mDelete.getRight(), mAction.getRight());
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mBg=(ImageView)findViewById(R.id.bg_disc);
         mDelete = findViewById(R.id.delete);
         mAction = findViewById(R.id.action);
+        mForegroundView.anchor(0, mDelete.getRight(), mAction.getRight());
     }
 
     @Override
