@@ -1,4 +1,4 @@
-# SwipeView
+# Easy Swipe Maker
 
 Library to build your own swipe out item views. this examples are only taken **5 minutes** each.
 Have a look at demos app available on google play: <https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout>
