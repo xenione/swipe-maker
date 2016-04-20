@@ -114,7 +114,8 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 ```
 
 where be can keep aware of swipe progress
-global: give has percent(1% 0-1) :0 means left limit and 1 means right limit.
+
+global: give us percent(1% 0-1) :0 means left limit and 1 means right limit.
 
 index and relative: in case we have more than 1 section that happend where we give more than 2 anchor points (like Two Steps Swipe)
 
@@ -125,9 +126,9 @@ relative: gives us the precent(1% 0-1) within the index section.
 In our case we have only one section so we don't have to take care about that.
 so lets add a nice transition effect:
     
-    ```java 
+```java 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
          backgroundView.setAlpha(global);
     }
-    ```
+```
