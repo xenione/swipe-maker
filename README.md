@@ -22,8 +22,7 @@ Let's do it that one (Right Side Swipe):
 ![screenshoot](https://cloud.githubusercontent.com/assets/4138527/14615699/3c94e41a-05a7-11e6-8cca-4e97219d63b9.png)
 
 
-
-1. Extend AbsCoordinatorLayout and create your own Coordianator in this case I called it HalfRightCoordinatorLayout
+1.Extend AbsCoordinatorLayout and create your own Coordianator in this case I called it HalfRightCoordinatorLayout
 
 ```java 
     public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout {
@@ -41,7 +40,7 @@ Anchor are the boundaries between swipe slides (look at layout next point). we w
     }
     
 ```
-2. Make your layout according to the previous point
+2.Make your layout according to the previous point
 Note: SwipeLayout id have to be *@+id/foregroundView*
 
 ```java
@@ -104,7 +103,6 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 
 </apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>;
 ```
-
 3. Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook called onTranslateChange(...)
 
  ```java 
