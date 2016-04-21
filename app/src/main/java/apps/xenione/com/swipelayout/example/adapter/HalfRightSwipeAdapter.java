@@ -1,13 +1,14 @@
 package apps.xenione.com.swipelayout.example.adapter;
 
 import android.content.Context;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,8 +51,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
         holder.delete.setOnClickListener(new OnItemDismiss(position));
-        ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme());
-        holder.discImage.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), album.getResource(), context.getTheme()));
+        Picasso.with(context).load(album.getResource()).into(holder.discImage);
     }
 
     @Override
