@@ -16,6 +16,8 @@ import java.util.List;
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
 import apps.xenione.com.swipelayout.example.swipe.TwoStepRightCoordinatorLayout;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -104,20 +106,21 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TwoStepRightCoordinatorLayout coordinatorLayout;
+        @Bind(R.id.title)
         public TextView title;
+        @Bind(R.id.bandName)
         public TextView bandName;
+        @Bind(R.id.bg_disc)
         public ImageView discImage;
+        @Bind(R.id.delete)
         public ImageButton delete;
+        @Bind(R.id.action)
         public ImageButton action;
 
         public ViewHolder(View view) {
             super(view);
             coordinatorLayout = (TwoStepRightCoordinatorLayout) view;
-            title = (TextView) view.findViewById(R.id.title);
-            bandName = (TextView) view.findViewById(R.id.bandName);
-            discImage = (ImageView) view.findViewById(R.id.bg_disc);
-            delete = (ImageButton) view.findViewById(R.id.delete);
-            action = (ImageButton) view.findViewById(R.id.action);
+            ButterKnife.bind(this, view);
         }
     }
 }
