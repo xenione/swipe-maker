@@ -103,9 +103,9 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 
 </apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>;
 ```
-3. Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook called onTranslateChange(...)
+3.Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook called onTranslateChange(...)
 
- ```java 
+```java 
     @Override
     public void onTranslateChange(float global, int index, float relative) {
     }
