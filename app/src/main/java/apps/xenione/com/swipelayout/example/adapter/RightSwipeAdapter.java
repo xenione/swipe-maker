@@ -48,12 +48,17 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
         Album album = getItem(position);
-        holder.coordinatorLayout.sync();
         holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
         holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        Picasso.with(context).load(album.getResource()).into(holder.discImage);
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.colorAccent).into(holder.discImage);
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.coordinatorLayout.sync();
     }
 
     @Override

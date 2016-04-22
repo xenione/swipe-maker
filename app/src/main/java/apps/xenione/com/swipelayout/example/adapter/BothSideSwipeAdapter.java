@@ -47,12 +47,17 @@ public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
-        holder.coordinatorLayout.sync();
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        Picasso.with(context).load(album.getResource()).into(holder.discImage);
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.colorAccent).into(holder.discImage);
         holder.delete.setOnClickListener(new OnDismissListener(position));
         holder.action.setOnClickListener(new OnActionListener(position));
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.coordinatorLayout.sync();
     }
 
     @Override
