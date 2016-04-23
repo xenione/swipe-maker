@@ -6,4 +6,5 @@
     <color name="colorSecondaryAccent">#40FFBE</color>
 
     <color name="header_nav">@color/colorAccent</color>
+    <color name="placeholder">@color/colorAccent</color>
 </resources>

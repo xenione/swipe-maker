@@ -31,11 +31,9 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
     }
 
     private List<Album> mAlbums;
-    private Context context;
     private OnItemClickListener mOnItemClickListener;
 
-    public TwoStepRightSwipeAdapter(Context context, List<Album> albums) {
-        this.context = context;
+    public TwoStepRightSwipeAdapter(List<Album> albums) {
         this.mAlbums = albums;
     }
 
@@ -46,10 +44,11 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Context context = holder.itemView.getContext();
         Album album = getItem(position);
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        Picasso.with(context).load(album.getResource()).placeholder(R.color.colorAccent).into(holder.discImage);
         holder.delete.setOnClickListener(new OnDismissListener(position));
         holder.action.setOnClickListener(new OnActionListener(position));
     }

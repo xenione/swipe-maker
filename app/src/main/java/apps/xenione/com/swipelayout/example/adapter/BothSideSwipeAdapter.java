@@ -31,11 +31,9 @@ public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdap
     }
 
     private List<Album> mAlbums;
-    private Context context;
     private OnItemClickListener mOnItemClickListener;
 
-    public BothSideSwipeAdapter(Context context, List<Album> albums) {
-        this.context = context;
+    public BothSideSwipeAdapter(List<Album> albums) {
         this.mAlbums = albums;
     }
 
@@ -46,10 +44,11 @@ public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Context context = holder.itemView.getContext();
         Album album = getItem(position);
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        Picasso.with(context).load(album.getResource()).placeholder(R.color.colorAccent).into(holder.discImage);
         holder.delete.setOnClickListener(new OnDismissListener(position));
         holder.action.setOnClickListener(new OnActionListener(position));
     }

@@ -28,11 +28,9 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
     }
 
     private List<Album> mAlbums;
-    private Context context;
     private OnItemDismissListener mOnItemDismissListener;
 
-    public HalfRightDragSwipeAdapter(Context context, List<Album> albums) {
-        this.context = context;
+    public HalfRightDragSwipeAdapter(List<Album> albums) {
         this.mAlbums = albums;
     }
 
@@ -44,11 +42,13 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album album = getItem(position);
+        Context context = holder.itemView.getContext();
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
         holder.coordinatorLayout.setOnClickListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
         holder.delete.setOnClickListener(new OnItemDismiss(position));
-        Picasso.with(context).load(album.getResource()).placeholder(R.color.colorAccent).into(holder.discImage);
+        Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
     }
 
     @Override

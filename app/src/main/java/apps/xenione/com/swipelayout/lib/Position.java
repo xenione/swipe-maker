@@ -11,21 +11,31 @@ public class Position {
     public float relative;
     public float global;
 
-    public void decSection() {
+    public void updatePosition(int newX) {
+        if (currX == newX) {
+            return;
+        }
+        updateSection(newX);
+        this.currX = newX;
+        this.relative = relative(newX);
+        this.global = global(newX);
+    }
+
+    private void decSection() {
         if (section == 0) {
             return;
         }
         section--;
     }
 
-    public void incSection() {
+    private void incSection() {
         if (section == anchors.size() - 1) {
             return;
         }
         section++;
     }
 
-    public boolean moveToLeft(int newX) {
+    private boolean moveToLeft(int newX) {
         return currX > newX;
     }
 
@@ -35,16 +45,6 @@ public class Position {
         } else if (newX > anchors.anchorFor(this.section + 1)) {
             incSection();
         }
-    }
-
-    public void updatePosition(int newX) {
-        if (currX == newX) {
-            return;
-        }
-        updateSection(newX);
-        this.currX = newX;
-        this.relative = relative(newX);
-        this.global = global(newX);
     }
 
     public float global(int posX) {

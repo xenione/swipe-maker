@@ -40,7 +40,7 @@ public class HalfRightDragFrictionSwipeFragment extends Fragment implements Half
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new HalfRightDragFrictionSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new HalfRightDragFrictionSwipeAdapter(Album.getAlbum());
         mAdapter.setOnItemDismissListener(this);
         recyclerView.setAdapter(mAdapter);
     }

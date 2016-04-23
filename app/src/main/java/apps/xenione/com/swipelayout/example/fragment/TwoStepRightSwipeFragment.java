@@ -40,7 +40,7 @@ public class TwoStepRightSwipeFragment extends Fragment implements TwoStepRightS
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new TwoStepRightSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new TwoStepRightSwipeAdapter(Album.getAlbum());
         mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
     }

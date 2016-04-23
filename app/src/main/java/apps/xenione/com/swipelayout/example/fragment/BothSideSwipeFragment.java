@@ -40,7 +40,7 @@ public class BothSideSwipeFragment extends Fragment implements BothSideSwipeAdap
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new BothSideSwipeAdapter(getContext(), Album.getAlbum());
+        mAdapter = new BothSideSwipeAdapter(Album.getAlbum());
         mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
     }
