@@ -28,67 +28,9 @@ public class SwipeLayout extends FrameLayout implements Runnable {
     private int mLastTouchX;
     private boolean mIsDragging = false;
     private OnTranslateChangeListener mOnTranslateChangeListener;
-    private PositionInfo mPositionInfo;
+    private Position mPositionInfo;
 
-    private class PositionInfo {
-        public Anchors anchors;
-        public int currX;
-        public int section;
-        public float relative;
-        public float global;
 
-        public void decSection() {
-            if (section == 0) {
-                return;
-            }
-            section--;
-        }
-
-        public void incSection() {
-            if (section == anchors.size() - 1) {
-                return;
-            }
-            section++;
-        }
-
-        public boolean moveToLeft(int newX) {
-            return currX > newX;
-        }
-
-        private void updateSection(int newX){
-            if (moveToLeft(newX) && (newX <= anchors.anchorFor(mPositionInfo.section))) {
-                decSection();
-            } else if (newX > anchors.anchorFor(mPositionInfo.section + 1)) {
-                incSection();
-            }
-        }
-
-        public void updatePosition(int newX) {
-            if (currX == newX) {
-                return;
-            }
-            updateSection(newX);
-            mPositionInfo.currX = newX;
-            mPositionInfo.relative = relative(newX);
-            mPositionInfo.global = global(newX);
-        }
-
-        public float global(int posX) {
-            return anchors.distance(posX);
-        }
-
-        public float relative(int posX){
-            return anchors.distance(mPositionInfo.section, posX);
-        }
-
-        public int closeTo(int posX) {
-            return anchors.closeTo(section, posX);
-        }
-
-        public int cropInLimits(int posX){
-            return anchors.cropInLimits(posX);
-        }
-    }
 
     public SwipeLayout(Context context) {
         this(context, null);
@@ -112,7 +54,7 @@ public class SwipeLayout extends FrameLayout implements Runnable {
     private void init() {
         mTouchSlop = ViewConfiguration.get(this.getContext()).getScaledTouchSlop();
         mHelperScroller = new ScrollerHelper(this.getContext());
-        mPositionInfo = new PositionInfo();
+        mPositionInfo = new Position();
     }
 
     public void anchor(Integer... points) {
