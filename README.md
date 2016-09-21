@@ -1,6 +1,6 @@
 # Easy Swipe Maker
 
-Library to build your own swipe out item views. this examples are only taken **5 minutes** each.
+Library to build your own swipe out item views. these examples are only taken **5 minutes** each.
 Have a look at demos app available on google play: <https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout>
 
 ## Example of **Both Side Swipe**
@@ -22,14 +22,14 @@ Let's do it that one (Right Side Swipe):
 ![screenshoot](https://cloud.githubusercontent.com/assets/4138527/14615699/3c94e41a-05a7-11e6-8cca-4e97219d63b9.png)
 
 
-1.Extend AbsCoordinatorLayout and create your own Coordianator in this case I called it HalfRightCoordinatorLayout
+1.Extend AbsCoordinatorLayout and create your own Coordianator, in this case I called it HalfRightCoordinatorLayout
 
 ```java 
     public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout {
 ```
 
-Override method doInitialViewsLocation() hook when views are place on the screen and set anchors for the swipe widget.
-Anchor are the boundaries between swipe slides (look at layout next point). we want that swipe slide within button (mBackgroundView see next point for further clarification) boundaries.
+Override method doInitialViewsLocation(). This hook arise when views are place on the screen. Set anchors for the swipe widget.
+Anchors are the boundaries between swipe slides (look at layout next point). We want that swipe slide within button "mBackgroundView" boundaries.
 
 ```java 
     @Override
@@ -113,11 +113,13 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 
 where be can keep aware of swipe progress
 
+The params description are:
+
 **global**: give us percent(1% 0-1) :0 means left limit and 1 means right limit.
 
 **index** and **relative**: in case we have more than 1 section that happend where we give more than 2 anchor points (like Two Steps Swipe)
 
-**index**: is the index of the secction (if we have 3 anchor points we have 2 sections: One from anchor 1 to 2 and the second secction from anchor 2 to 3)
+**index**: is the index of the section (if we have 3 anchor points we have 2 sections: One from anchor 1 to 2 and the second secction from anchor 2 to 3)
 
 **relative**: gives us the precent(1% 0-1) within the index section.
     
