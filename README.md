@@ -1,9 +1,8 @@
 # Easy Swipe Maker
 
-Library to build your own swipe out item views. these examples are only taken **5 minutes** each.
-Have a look at demos app available on google play: <https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout>
+From the library to build your own swipeout item views these examples will only take 5 minutes each. Have a look at the demos app available on google play:  <https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout>
 
-## Example of **Both Side Swipe**
+## Example of a **Swipe of Both Sides**
 
 ![both_side_swipe](https://cloud.githubusercontent.com/assets/4138527/14615552/8428c3e2-05a6-11e6-8b85-4627a6c79d87.gif)
 
@@ -11,25 +10,25 @@ Have a look at demos app available on google play: <https://play.google.com/stor
 
 ![drag_swipe](https://cloud.githubusercontent.com/assets/4138527/14615553/8429c044-05a6-11e6-8d80-3d19d29e1a31.gif)
 
-## Example of **Right Two Steps Swipe** with amazing color change
+## Example of a **Two-steps Right Swipe** with amazing color change
 
 ![two_step_swipe](https://cloud.githubusercontent.com/assets/4138527/14615554/842ed408-05a6-11e6-8111-f11d91844031.gif)
 
-### Are you ready? I show you how:
+### Are you ready? I'll show you how:
 
-Let's do it that one (Right Side Swipe):
+Let's do this one (Right Side Swipe):
 
 ![screenshoot](https://cloud.githubusercontent.com/assets/4138527/14615699/3c94e41a-05a7-11e6-8cca-4e97219d63b9.png)
 
 
-1.Extend AbsCoordinatorLayout and create your own Coordianator, in this case I called it HalfRightCoordinatorLayout
+1.Extend AbsCoordinatorLayout and create your own Coordinator, in this case I called it HalfRightCoordinatorLayout
 
 ```java 
     public class HalfRightCoordinatorLayout extends AbsCoordinatorLayout {
 ```
 
-Override method doInitialViewsLocation(). This hook arise when views are place on the screen. Set anchors for the swipe widget.
-Anchors are the boundaries between swipe slides (look at layout next point). We want that swipe slide within button "mBackgroundView" boundaries.
+Override the doInitialViewsLocation() method. This hook arises when views are placed on the screen. Set anchors for the swipe widget.
+Anchors are the boundaries between swipe slides (look at the layout at the next point). We want that swipe slides within the button "mBackgroundView" boundaries.
 
 ```java 
     @Override
@@ -41,7 +40,7 @@ Anchors are the boundaries between swipe slides (look at layout next point). We 
     
 ```
 2.Make your layout according to the previous point
-Note: SwipeLayout id have to be *@+id/foregroundView*
+Note: SwipeLayout Id must be *@+id/foregroundView*
 
 ```java
 <?xml version="1.0" encoding="utf-8"?>
@@ -103,7 +102,7 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
 
 </apps.xenione.com.swipelayout.example.swipe.HalfRightCoordinatorLayout>;
 ```
-3.Make your amazing transformations, go back to your class that inherit from AbsCoordinatorLayout and you have a hook called onTranslateChange(...)
+3.Make your amazing transformations- Go back to your class inherited from AbsCoordinatorLayout (im our case HalfRightCoordinatorLayout ) and you have a hook called onTranslateChange(...).
 
 ```java 
     @Override
@@ -111,20 +110,20 @@ Note: SwipeLayout id have to be *@+id/foregroundView*
     }
 ```
 
-where be can keep aware of swipe progress
+where you can monitor swipe progress.
 
-The params description are:
+The parameter descriptions are:
 
-**global**: give us percent(1% 0-1) :0 means left limit and 1 means right limit.
+**global**: give us percentage (1%: 0-1) :0 means left limit and 1 means right limit.
 
-**index** and **relative**: in case we have more than 1 section that happend where we give more than 2 anchor points (like Two Steps Swipe)
+**index** and **relative**: in case we have more than 1 section that would happened if we had given more than 2 anchor points (such as Two-step Swipe)
 
-**index**: is the index of the section (if we have 3 anchor points we have 2 sections: One from anchor 1 to 2 and the second secction from anchor 2 to 3)
+**index**: is the index of the section (if we had got 3 anchor points we would have 2 sections: One from anchor 1 to 2 and the second from anchor 2 to 3)
 
-**relative**: gives us the precent(1% 0-1) within the index section.
+**relative**: gives us the precentage(1%: 0-1) within the index section.
     
-In our case we have only one section so we don't have to take care about that.
-so lets add a nice transition effect:
+In our case we have only one section so we don't have to take care of that.
+So let's add a nice transition effect:
     
 ```java 
     @Override
