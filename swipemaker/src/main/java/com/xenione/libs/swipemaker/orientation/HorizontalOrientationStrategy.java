@@ -22,13 +22,14 @@ public  class HorizontalOrientationStrategy extends OrientationStrategy {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+            fling();
             mIsDragging = false;
             return false;
         }
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mHelperScroller.finish();
                 mLastTouchX = (int) ev.getX();
+                mHelperScroller.finish();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -52,8 +53,8 @@ public  class HorizontalOrientationStrategy extends OrientationStrategy {
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             if (mIsDragging) {
                 disallowParentInterceptTouchEvent(false);
-                fling();
             }
+            fling();
             boolean handled = mIsDragging;
             mIsDragging = false;
             return handled;
@@ -61,7 +62,6 @@ public  class HorizontalOrientationStrategy extends OrientationStrategy {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mHelperScroller.finish();
                 mLastTouchX = (int) event.getX();
                 break;
             }

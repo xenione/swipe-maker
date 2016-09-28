@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-import com.xenione.libs.swipemaker.orientation.HorizontalOrientationStrategy;
 import com.xenione.libs.swipemaker.orientation.OrientationStrategy;
 import com.xenione.libs.swipemaker.orientation.OrientationStrategyFactory;
 
@@ -44,7 +43,9 @@ public class SwipeLayout extends FrameLayout {
     }
 
     private void init() {
-        orientationStrategy = new HorizontalOrientationStrategy(this);
+        orientationStrategy = OrientationStrategyFactory
+                .get(OrientationStrategy.HORIZONTAL)
+                .make(this);
     }
 
     public void setOrientation(int orientation) {
