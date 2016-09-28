@@ -11,10 +11,11 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import com.xenione.libs.swipemaker.AbsCoordinatorLayout;
+import com.xenione.libs.swipemaker.SwipeLayout;
 
 import apps.xenione.com.swipelayout.R;
-import apps.xenione.com.swipelayout.lib.AbsCoordinatorLayout;
-import apps.xenione.com.swipelayout.lib.SwipeLayout;
+
 
 /**
  * Created on 06/04/16.

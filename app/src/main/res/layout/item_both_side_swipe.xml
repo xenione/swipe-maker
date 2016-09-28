@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<apps.xenione.com.swipelayout.example.swipe.BothSideCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<apps.xenione.com.swipelayout.example.swipe.BothSideCoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height">
 
     <RelativeLayout
-        android:id="@+id/backgroundView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@id/backgroundView">
 
         <ImageButton
             android:id="@+id/delete"
@@ -32,8 +33,8 @@
             android:background="@color/colorSecondaryAccent" />
     </RelativeLayout>
 
-    <apps.xenione.com.swipelayout.lib.SwipeLayout
-        android:id="@+id/foregroundView"
+    <com.xenione.libs.swipemaker.SwipeLayout
+        android:id="@id/foregroundView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -73,6 +74,6 @@
 
         </RelativeLayout>
 
-    </apps.xenione.com.swipelayout.lib.SwipeLayout>
+    </com.xenione.libs.swipemaker.SwipeLayout>
 
 </apps.xenione.com.swipelayout.example.swipe.BothSideCoordinatorLayout>

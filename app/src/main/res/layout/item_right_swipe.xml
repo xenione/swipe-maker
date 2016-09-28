@@ -5,13 +5,13 @@
     android:layout_height="wrap_content">
 
     <ProgressBar
-        android:id="@+id/backgroundView"
+        android:id="@id/backgroundView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <apps.xenione.com.swipelayout.lib.SwipeLayout
-        android:id="@+id/foregroundView"
+    <com.xenione.libs.swipemaker.SwipeLayout
+        android:id="@id/foregroundView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:orientation="vertical">
@@ -51,6 +51,6 @@
 
         </RelativeLayout>
 
-    </apps.xenione.com.swipelayout.lib.SwipeLayout>
+    </com.xenione.libs.swipemaker.SwipeLayout>
 
 </apps.xenione.com.swipelayout.example.swipe.RightCoordinatorLayout>
