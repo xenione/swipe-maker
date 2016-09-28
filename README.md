@@ -50,7 +50,7 @@ Note: SwipeLayout Id must be *@+id/foregroundView*
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:id="@+id/backgroundView"
+        android:id="@id/backgroundView"
         android:background="@color/colorAccent"
         android:src="@drawable/ic_delete"
         android:padding="@dimen/button_padding"
@@ -58,7 +58,7 @@ Note: SwipeLayout Id must be *@+id/foregroundView*
         android:layout_height="match_parent"/>
 
     <apps.xenione.com.swipelayout.lib.SwipeLayout
-        android:id="@+id/foregroundView"
+        android:id="@id/foregroundView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:orientation="vertical">
