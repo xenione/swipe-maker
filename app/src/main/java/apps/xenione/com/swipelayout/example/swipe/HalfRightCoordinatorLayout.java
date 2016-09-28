@@ -9,7 +9,6 @@ import com.xenione.libs.swipemaker.AbsCoordinatorLayout;
 import com.xenione.libs.swipemaker.SwipeLayout;
 import apps.xenione.com.swipelayout.R;
 
-
 /**
  * Created on 06/04/16.
  */
