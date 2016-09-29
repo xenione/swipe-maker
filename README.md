@@ -20,7 +20,8 @@ Let's do this one (Right Side Swipe):
 
 ![screenshoot](https://cloud.githubusercontent.com/assets/4138527/14615699/3c94e41a-05a7-11e6-8cca-4e97219d63b9.png)
 
-Add it on your project: 
+Add it on your project:
+
 Gradle:
 ```java 
 compile 'com.xenione.libs:swipe-maker:1.0.6'
