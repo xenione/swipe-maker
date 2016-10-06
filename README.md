@@ -47,7 +47,7 @@ Anchors are the boundaries between swipe slides (look at the layout at the next 
     
 ```
 2.Make your layout according to the previous point
-Note: SwipeLayout Id must be *@id/foregroundView* and backgound view must be *@id/backgroundView*
+Note: SwipeLayout Id must be *@id/foregroundView* and Background View must be *@id/backgroundView*
 
 ```java
 <?xml version="1.0" encoding="utf-8"?>
