@@ -1,6 +1,6 @@
 # Easy Swipe Maker
 
-From the library to build your own swipeout item views these examples will only take 5 minutes each. Have a look at the demos app available on [google play](https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout)
+From the library to build your own swipeout item views. These examples will only take 5 minutes each. Have a look at the demos app available on [google play](https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout)
 
 ## Example of a **Swipe of Both Sides**
 
