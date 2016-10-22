@@ -144,3 +144,5 @@ So let's add a nice transition effect:
 ### Before-After Effect
 
 ![before_after_effect](https://cloud.githubusercontent.com/assets/4138527/19211444/9713cbdc-8d3c-11e6-84af-18a18ab02efb.gif)
+
+find out more at [github](https://github.com/xenione/BeforeAfterEffect)
