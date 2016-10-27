@@ -30,18 +30,18 @@ public class SwipeLayout extends FrameLayout {
 
         final int id;
 
-        OrientationStrategyFactory get(){
+        OrientationStrategyFactory get() {
 
-           switch (this.id){
-               case 0: {
-                   return new VerticalOrientationStrategyFactory();
-               }
-               default:
-               case 1: {
-                   return new HorizontalOrientationStrategyFactory();
-               }
-           }
-       }
+            switch (this.id) {
+                case 0: {
+                    return new HorizontalOrientationStrategyFactory();
+                }
+                default:
+                case 1: {
+                    return new VerticalOrientationStrategyFactory();
+                }
+            }
+        }
     }
 
     public interface OnTranslateChangeListener {
