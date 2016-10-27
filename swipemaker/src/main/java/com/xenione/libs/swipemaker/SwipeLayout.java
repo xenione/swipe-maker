@@ -5,10 +5,13 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 
+import com.xenione.libs.swipemaker.orientation.HorizontalOrientationStrategy;
 import com.xenione.libs.swipemaker.orientation.OrientationStrategy;
 import com.xenione.libs.swipemaker.orientation.OrientationStrategyFactory;
+import com.xenione.libs.swipemaker.orientation.VerticalOrientationStrategy;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -16,6 +19,30 @@ import com.xenione.libs.swipemaker.orientation.OrientationStrategyFactory;
 public class SwipeLayout extends FrameLayout {
 
     private static final String TAG = "SwipeLayout";
+
+    public enum Orientation {
+        HORIZONTAL(0),
+        VERTICAL(1);
+
+        Orientation(int id) {
+            this.id = id;
+        }
+
+        final int id;
+
+        OrientationStrategyFactory get(){
+
+           switch (this.id){
+               case 0: {
+                   return new VerticalOrientationStrategyFactory();
+               }
+               default:
+               case 1: {
+                   return new HorizontalOrientationStrategyFactory();
+               }
+           }
+       }
+    }
 
     public interface OnTranslateChangeListener {
         void onTranslateChange(float globalPercent, int index, float relativePercent);
@@ -43,13 +70,11 @@ public class SwipeLayout extends FrameLayout {
     }
 
     private void init() {
-        orientationStrategy = OrientationStrategyFactory
-                .get(OrientationStrategy.HORIZONTAL)
-                .make(this);
+        orientationStrategy = Orientation.HORIZONTAL.get().make(this);
     }
 
-    public void setOrientation(int orientation) {
-        orientationStrategy = OrientationStrategyFactory.get(orientation).make(this);
+    public void setOrientation(Orientation orientation) {
+        orientationStrategy = orientation.get().make(this);
     }
 
     public void anchor(Integer... points) {
@@ -76,5 +101,22 @@ public class SwipeLayout extends FrameLayout {
 
     public void translateTo(int position) {
         orientationStrategy.translateTo(position);
+    }
+
+
+    static class HorizontalOrientationStrategyFactory implements OrientationStrategyFactory {
+
+        @Override
+        public OrientationStrategy make(View view) {
+            return new HorizontalOrientationStrategy(view);
+        }
+    }
+
+    static class VerticalOrientationStrategyFactory implements OrientationStrategyFactory {
+
+        @Override
+        public OrientationStrategy make(View view) {
+            return new VerticalOrientationStrategy(view);
+        }
     }
 }

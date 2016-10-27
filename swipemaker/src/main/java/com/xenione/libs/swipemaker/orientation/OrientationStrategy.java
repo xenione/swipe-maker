@@ -18,10 +18,6 @@ import com.xenione.libs.swipemaker.SwipeLayout;
  */
 public abstract class OrientationStrategy implements Runnable {
 
-    public static final int HORIZONTAL = 1;
-
-    public static final int VERTICAL = 2;
-
     ScrollerHelper mHelperScroller;
     final int mTouchSlop;
 
