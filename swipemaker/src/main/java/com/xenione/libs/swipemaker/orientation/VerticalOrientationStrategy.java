@@ -22,28 +22,28 @@ public class VerticalOrientationStrategy extends OrientationStrategy {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+            fling();
             mIsDragging = false;
             return false;
         }
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mHelperScroller.finish();
                 mLastTouchY = (int) ev.getY();
+                mHelperScroller.finish();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                int deltaX = Math.abs((int) ev.getY() - mLastTouchY);
-                mIsDragging = deltaX > mTouchSlop;
+                int deltaY = Math.abs((int) ev.getY() - mLastTouchY);
+                mIsDragging = deltaY > mTouchSlop;
                 if (mIsDragging) {
                     disallowParentInterceptTouchEvent(true);
-                    mLastTouchY = (int) ev.getX();
+                    mLastTouchY = (int) ev.getY();
                 }
             }
         }
 
         return mIsDragging;
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -61,12 +61,11 @@ public class VerticalOrientationStrategy extends OrientationStrategy {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                mHelperScroller.finish();
                 mLastTouchY = (int) event.getY();
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                int deltaY = (int) event.getX() - mLastTouchY;
+                int deltaY = (int) event.getY() - mLastTouchY;
                 if (mIsDragging) {
                     translateBy(deltaY);
                 } else if (Math.abs(deltaY) > mTouchSlop) {

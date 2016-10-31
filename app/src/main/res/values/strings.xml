@@ -7,4 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="send_to">Share Easy Swipe Maker</string>
+
+    <string name="action_label">Action is clicked</string>
+    <string name="delete_label">Level is clicked</string>
 </resources>

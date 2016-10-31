@@ -20,6 +20,7 @@ import apps.xenione.com.swipelayout.example.fragment.HalfRightDragSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.HalfRightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.RightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.TwoStepRightSwipeFragment;
+import apps.xenione.com.swipelayout.example.fragment.VerticalSwipeFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,22 +60,41 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_rightswipe) {
-            showFragment(RightSwipeFragment.newInstance(), RightSwipeFragment.TAG);
-        } else if (id == R.id.nav_half_swipe) {
-            showFragment(HalfRightSwipeFragment.newInstance(), HalfRightSwipeFragment.TAG);
-        } else if (id == R.id.nav_two_step_swipe) {
-            showFragment(TwoStepRightSwipeFragment.newInstance(), TwoStepRightSwipeFragment.TAG);
-        } else if (id == R.id.nav_both_side_swipe) {
-            showFragment(BothSideSwipeFragment.newInstance(), BothSideSwipeFragment.TAG);
-        } else if (id == R.id.nav_right_drag_swipe) {
-            showFragment(HalfRightDragSwipeFragment.newInstance(), HalfRightDragSwipeFragment.TAG);
-        } else if (id == R.id.nav_right_drag_friction_swipe) {
-            showFragment(HalfRightDragFrictionSwipeFragment.newInstance(), HalfRightDragFrictionSwipeFragment.TAG);
-        } else if (id == R.id.nav_share) {
-            launchSharer();
-        }
+        switch(id){
+            case R.id.nav_rightswipe: {
+                showFragment(RightSwipeFragment.newInstance(), RightSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_half_swipe: {
+                showFragment(HalfRightSwipeFragment.newInstance(), HalfRightSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_two_step_swipe: {
+                showFragment(TwoStepRightSwipeFragment.newInstance(), TwoStepRightSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_both_side_swipe: {
+                showFragment(BothSideSwipeFragment.newInstance(), BothSideSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_right_drag_swipe: {
+                showFragment(HalfRightDragSwipeFragment.newInstance(), HalfRightDragSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_right_drag_friction_swipe: {
+                showFragment(HalfRightDragFrictionSwipeFragment.newInstance(), HalfRightDragFrictionSwipeFragment.TAG);
+                break;
+            }
 
+            case R.id.nav_share: {
+                launchSharer();
+                break;
+            }
+            case R.id.nav_vertical_swipe: {
+                showFragment(VerticalSwipeFragment.newInstance(), VerticalSwipeFragment.TAG);
+                break;
+            }
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
