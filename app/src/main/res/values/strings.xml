@@ -9,5 +9,7 @@
     <string name="send_to">Share Easy Swipe Maker</string>
 
     <string name="action_label">Action is clicked</string>
-    <string name="delete_label">Level is clicked</string>
+    <string name="delete_label">Delete is clicked</string>
+
+    <string name="gossa_sorda_intro"><![CDATA[<b>La Gossa Sorda</b> és un grup musical de Pego (Marina Alta, País Valencià). La seua música té ritmes de Ska, Rock, Reggae i Punk amb la utilització de molts ritmes mediterranis i altres influències. Fan servir instruments com la dolçaina. Les seves lletres en valencià ataquen els fonaments del sistema, la injustícia de l\'ordre social i mundial actual, la lluita per salvar el País Valencià, el consumisme, la corrupció política, la crisi econòmica i l\'integrisme religiós.]]></string>
 </resources>

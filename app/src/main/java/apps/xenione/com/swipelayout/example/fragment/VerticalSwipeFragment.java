@@ -3,6 +3,7 @@ package apps.xenione.com.swipelayout.example.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class VerticalSwipeFragment extends Fragment {
     TextView bandNameTV;
     @Bind(R.id.bg_disc)
     ImageView discBg;
+    @Bind(R.id.body_text)
+    TextView bodyText;
 
     public static Fragment newInstance() {
         return new VerticalSwipeFragment();
@@ -50,6 +53,7 @@ public class VerticalSwipeFragment extends Fragment {
         titleTV.setText(album.getName());
         bandNameTV.setText(album.getBandName());
         Picasso.with(getContext()).load(album.getResource()).placeholder(R.color.placeholder).into(discBg);
+        bodyText.setText(Html.fromHtml(getString(R.string.gossa_sorda_intro)));
     }
 
     @Override
