@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <apps.xenione.com.swipelayout.example.swipe.VerticalCoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <ImageButton
+                android:id="@+id/action"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/colorSecondaryAccent"
+                android:padding="@dimen/button_padding"
+                android:src="@drawable/ic_action" />
+
+            <ImageButton
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:padding="@dimen/button_padding"
+                android:src="@drawable/ic_delete" />
+
+        </LinearLayout>
+
+        <include layout="@layout/item_foreground_swipe" />
+
+    </apps.xenione.com.swipelayout.example.swipe.VerticalCoordinatorLayout>
+
+    <TextView
+        android:id="@+id/body_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="16sp"
+        tools:text="@string/gossa_sorda_intro" />
+</LinearLayout>
