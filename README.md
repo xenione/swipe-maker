@@ -24,7 +24,7 @@ Add it on your project:
 
 Gradle:
 ```java 
-compile 'com.xenione.libs:swipe-maker:1.0.6'
+compile 'com.xenione.libs:swipe-maker:1.1.1'
 ```
 
 
@@ -147,12 +147,8 @@ So let's add a nice transition effect:
 
 find out more at [github](https://github.com/xenione/BeforeAfterEffect)
 
-## Next version v1.1.0 -Allow vertical swipe.
+## Last version v1.1.1 - Feature added: Allow vertical swipe.
 
-Gradle:
-```java 
-compile 'com.xenione.libs:swipe-maker:1.1.0'
-```
 
 ![vertical swipe](https://cloud.githubusercontent.com/assets/4138527/19872352/93fbcf0a-9fb9-11e6-82b5-efee365bb2e8.gif)
 
