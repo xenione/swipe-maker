@@ -2,7 +2,7 @@
 <apps.xenione.com.swipelayout.example.swipe.HalfRightDragFrictionCoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/item_height">
 
     <ImageButton
         android:id="@id/backgroundView"
