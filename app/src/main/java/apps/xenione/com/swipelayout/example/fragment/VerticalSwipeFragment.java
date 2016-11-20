@@ -111,7 +111,7 @@ public class VerticalSwipeFragment extends Fragment {
             titleTV.setText(album.getName());
             bandNameTV.setText(album.getBandName());
             Picasso.with(getContext()).load(album.getResource()).placeholder(R.color.placeholder).into(discBg);
-            bodyText.setText(Html.fromHtml(getString(R.string.gossa_sorda_intro)));
+            bodyText.setText(Html.fromHtml(album.getDescription()));
         }
 
         @Override
