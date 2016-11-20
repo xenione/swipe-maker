@@ -52,9 +52,9 @@ public class VerticalOrientationStrategy extends OrientationStrategy {
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             if (mIsDragging) {
                 disallowParentInterceptTouchEvent(false);
-                fling();
             }
-            boolean handled = mIsDragging;
+            boolean isFling = fling();
+            boolean handled = mIsDragging | isFling;
             mIsDragging = false;
             return handled;
         }

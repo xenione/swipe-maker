@@ -16,18 +16,23 @@ public class ScrollerHelper {
         mScroller = new OverScroller(context);
     }
 
-    public void startScroll(int startX, int endX) {
+    public boolean startScroll(int startX, int endX) {
         if (startX == endX) {
-            return;
+            return false;
         }
         int deltaX = endX - startX;
         mScroller.startScroll(startX, 0, deltaX, SCROLL_ANIMATION_DURATION);
+        return true;
     }
 
     public void finish() {
         if (!mScroller.isFinished()) {
             mScroller.forceFinished(true);
         }
+    }
+
+    public boolean isFinished() {
+        return mScroller.isFinished();
     }
 
     public boolean computeScrollOffset() {

@@ -7,7 +7,7 @@ import android.view.View;
 /**
  * Created by Eugeni on 28/09/2016.
  */
-public  class HorizontalOrientationStrategy extends OrientationStrategy {
+public class HorizontalOrientationStrategy extends OrientationStrategy {
 
     private int mLastTouchX;
     private boolean mIsDragging;
@@ -23,7 +23,6 @@ public  class HorizontalOrientationStrategy extends OrientationStrategy {
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             fling();
-            mIsDragging = false;
             return false;
         }
         switch (action) {
@@ -54,8 +53,8 @@ public  class HorizontalOrientationStrategy extends OrientationStrategy {
             if (mIsDragging) {
                 disallowParentInterceptTouchEvent(false);
             }
-            fling();
-            boolean handled = mIsDragging;
+            boolean isFling = fling();
+            boolean handled = mIsDragging | isFling;
             mIsDragging = false;
             return handled;
         }

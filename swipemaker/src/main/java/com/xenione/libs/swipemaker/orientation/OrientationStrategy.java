@@ -78,11 +78,16 @@ public abstract class OrientationStrategy implements Runnable {
         return mPositionInfo.cropInLimits(x);
     }
 
-    void fling() {
+    boolean fling() {
         int start = getDelta();
         int end = calculateEnd(start);
-        mHelperScroller.startScroll(start, end);
+        boolean started = mHelperScroller.startScroll(start, end);
         ViewCompat.postOnAnimation(mView, this);
+        return started;
+    }
+
+    boolean isFling() {
+        return !mHelperScroller.isFinished();
     }
 
     @Override
