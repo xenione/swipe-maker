@@ -19,6 +19,7 @@ import apps.xenione.com.swipelayout.example.fragment.HalfRightDragFrictionSwipeF
 import apps.xenione.com.swipelayout.example.fragment.HalfRightDragSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.HalfRightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.RightSwipeFragment;
+import apps.xenione.com.swipelayout.example.fragment.SwingSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.TwoStepRightSwipeFragment;
 import apps.xenione.com.swipelayout.example.fragment.VerticalSwipeFragment;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -85,13 +86,16 @@ public class MainActivity extends AppCompatActivity
                 showFragment(HalfRightDragFrictionSwipeFragment.newInstance(), HalfRightDragFrictionSwipeFragment.TAG);
                 break;
             }
-
-            case R.id.nav_share: {
-                launchSharer();
+            case R.id.nav_swing_swipe: {
+                showFragment(SwingSwipeFragment.newInstance(), SwingSwipeFragment.TAG);
                 break;
             }
             case R.id.nav_vertical_swipe: {
                 showFragment(VerticalSwipeFragment.newInstance(), VerticalSwipeFragment.TAG);
+                break;
+            }
+            case R.id.nav_share: {
+                launchSharer();
                 break;
             }
         }

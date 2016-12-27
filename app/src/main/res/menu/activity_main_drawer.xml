@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Rigth Swipe" />
         <item
+            android:id="@+id/nav_swing_swipe"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Swing Swipe" />
+        <item
             android:id="@+id/nav_half_swipe"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Half Swipe" />
