@@ -1,6 +1,12 @@
 # Easy Swipe Maker
 
-From the library to build your own swipeout item views. These examples will only take 5 minutes each. Have a look at the demos app available on [google play](https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout)
+From the library to build your own swipeout item views. These examples will only take 5 minutes each. Have a look at the demos app available on [google play](https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout) (is not updated -NO Swing and Vertical swipe examples)
+
+This library is extrematly powerful since you can custom your own swipe effects "No limits for your imagination". Here you can find some examples:
+
+## Example of a **Swipe of Swing **
+
+![swing_swipe](https://cloud.githubusercontent.com/assets/4138527/21510499/6c44dd96-cc94-11e6-9cd5-c182c33d1b80.gif)
 
 ## Example of a **Swipe of Both Sides**
 
