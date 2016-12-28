@@ -14,7 +14,7 @@ This library is extrematly powerful since you can custom your own swipe effects 
 
 ![both_side_swipe](https://cloud.githubusercontent.com/assets/4138527/14615552/8428c3e2-05a6-11e6-8b85-4627a6c79d87.gif)
 
-## Example of **Right Side Swipe**
+## Example of **Drag Right Side Swipe**
 
 ![drag_swipe](https://cloud.githubusercontent.com/assets/4138527/14615553/8429c044-05a6-11e6-8d80-3d19d29e1a31.gif)
 
