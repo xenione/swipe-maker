@@ -46,14 +46,14 @@ public class SwingSwipeFragment extends Fragment implements SwingSwipeAdapter.On
     }
 
     @Override
-    public void onRightItemDismissed(int position) {
-        mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item swipe right at position :" + position, Toast.LENGTH_LONG).show();
+    public void onRightItemDismissed(Album album) {
+        mAdapter.deleteItem(album);
+        Toast.makeText(getContext(), "item swipe right with title :" + album.getName(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onLeftItemDismissed(int position) {
-        mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item swipe left at position :" + position, Toast.LENGTH_LONG).show();
+    public void onLeftItemDismissed(Album album) {
+        mAdapter.deleteItem(album);
+        Toast.makeText(getContext(), "item swipe left at position :" + album.getName(), Toast.LENGTH_LONG).show();
     }
 }

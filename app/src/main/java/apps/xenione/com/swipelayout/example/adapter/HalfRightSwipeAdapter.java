@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
-        void onItemDismissed(int position);
+        void onItemDismissed(Album album);
     }
 
     public interface OnItemSelectListener {
@@ -52,7 +52,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        holder.delete.setOnClickListener(new OnItemDismiss(position));
+        holder.delete.setOnClickListener(new OnItemDismiss(album));
     }
 
     @Override
@@ -66,10 +66,14 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         return mAlbums.size();
     }
 
-    public void deleteItem(int position) {
-        mAlbums.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
+    public void deleteItem(Album album) {
+        int index = mAlbums.indexOf(album);
+        if (index == -1) {
+            return;
+        }
+        mAlbums.remove(index);
+        notifyItemRemoved(index);
+        notifyItemRangeChanged(index, getItemCount());
     }
 
 
@@ -87,16 +91,16 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
 
     public class OnItemDismiss implements View.OnClickListener {
 
-        private int position;
+        private Album album;
 
-        public OnItemDismiss(int position) {
-            this.position = position;
+        public OnItemDismiss(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
             if (mOnItemDismissListener != null) {
-                mOnItemDismissListener.onItemDismissed(position);
+                mOnItemDismissListener.onItemDismissed(album);
             }
         }
     }

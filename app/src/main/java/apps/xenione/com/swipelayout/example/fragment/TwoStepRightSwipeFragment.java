@@ -46,13 +46,13 @@ public class TwoStepRightSwipeFragment extends Fragment implements TwoStepRightS
     }
 
     @Override
-    public void onItemDismissed(int position) {
-        mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item deleted at position :" + position, Toast.LENGTH_LONG).show();
+    public void onItemDismissed(Album album) {
+        mAdapter.deleteItem(album);
+        Toast.makeText(getContext(), "item deleted with title :" + album.getName(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onItemAction(int position) {
-        Toast.makeText(getContext(), "perform action on item:" + position, Toast.LENGTH_LONG).show();
+    public void onItemAction(Album album) {
+        Toast.makeText(getContext(), "perform action on item:" + album.getName(), Toast.LENGTH_LONG).show();
     }
 }

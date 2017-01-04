@@ -25,9 +25,9 @@ import butterknife.ButterKnife;
 public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightSwipeAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemDismissed(int position);
+        void onItemDismissed(Album album);
 
-        void onItemAction(int position);
+        void onItemAction(Album album);
     }
 
     private List<Album> mAlbums;
@@ -49,8 +49,8 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        holder.delete.setOnClickListener(new OnDismissListener(position));
-        holder.action.setOnClickListener(new OnActionListener(position));
+        holder.delete.setOnClickListener(new OnDismissListener(album));
+        holder.action.setOnClickListener(new OnActionListener(album));
     }
 
     @Override
@@ -68,12 +68,15 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
         mOnItemClickListener = listener;
     }
 
-    public void deleteItem(int position) {
-        mAlbums.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
+    public void deleteItem(Album album) {
+        int index = mAlbums.indexOf(album);
+        if (index == -1) {
+            return;
+        }
+        mAlbums.remove(index);
+        notifyItemRemoved(index);
+        notifyItemRangeChanged(index, getItemCount());
     }
-
 
     private Album getItem(int position) {
         return mAlbums.get(position);
@@ -81,29 +84,29 @@ public class TwoStepRightSwipeAdapter extends RecyclerView.Adapter<TwoStepRightS
 
     private class OnDismissListener implements View.OnClickListener {
 
-        private int position;
+        private Album album;
 
-        public OnDismissListener(int position) {
-            this.position = position;
+        public OnDismissListener(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
-            mOnItemClickListener.onItemDismissed(position);
+            mOnItemClickListener.onItemDismissed(album);
         }
     }
 
     private class OnActionListener implements View.OnClickListener {
 
-        private int position;
+        private Album album;
 
-        public OnActionListener(int position) {
-            this.position = position;
+        public OnActionListener(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
-            mOnItemClickListener.onItemAction(position);
+            mOnItemClickListener.onItemAction(album);
         }
     }
 

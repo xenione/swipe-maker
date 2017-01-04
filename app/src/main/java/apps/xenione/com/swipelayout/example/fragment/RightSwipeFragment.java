@@ -47,13 +47,13 @@ public class RightSwipeFragment extends Fragment implements RightSwipeAdapter.On
     }
 
     @Override
-    public void onItemDismissed(int position) {
-        mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item deleted at position : " + position, Toast.LENGTH_LONG).show();
+    public void onItemDismissed(Album album) {
+        mAdapter.deleteItem(album);
+        Toast.makeText(getContext(), "item deleted at album : " + album.getName(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onItemSelected(int position) {
-        Toast.makeText(getContext(), "item selected at position : " + position, Toast.LENGTH_LONG).show();
+    public void onItemSelected(Album album) {
+        Toast.makeText(getContext(), "item selected at position with title: " + album.getName(), Toast.LENGTH_LONG).show();
     }
 }

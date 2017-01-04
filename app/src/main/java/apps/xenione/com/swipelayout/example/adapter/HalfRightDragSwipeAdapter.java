@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDragSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
-        void onItemDismissed(int position);
+        void onItemDismissed(Album album);
     }
 
     private List<Album> mAlbums;
@@ -44,10 +44,9 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
         Album album = getItem(position);
         Context context = holder.itemView.getContext();
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
-        holder.coordinatorLayout.setOnClickListener(new OnItemDismiss(position));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
-        holder.delete.setOnClickListener(new OnItemDismiss(position));
+        holder.delete.setOnClickListener(new OnItemDismiss(album));
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
     }
 
@@ -62,10 +61,14 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
         return mAlbums.size();
     }
 
-    public void deleteItem(int position) {
-        mAlbums.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
+    public void deleteItem(Album album) {
+        int index = mAlbums.indexOf(album);
+        if (index == -1) {
+            return;
+        }
+        mAlbums.remove(index);
+        notifyItemRemoved(index);
+        notifyItemRangeChanged(index, getItemCount());
     }
 
 
@@ -79,15 +82,15 @@ public class HalfRightDragSwipeAdapter extends RecyclerView.Adapter<HalfRightDra
 
     public class OnItemDismiss implements View.OnClickListener {
 
-        private int position;
+        private Album album;
 
-        public OnItemDismiss(int position) {
-            this.position = position;
+        public OnItemDismiss(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
-            mOnItemDismissListener.onItemDismissed(position);
+            mOnItemDismissListener.onItemDismissed(album);
         }
     }
 

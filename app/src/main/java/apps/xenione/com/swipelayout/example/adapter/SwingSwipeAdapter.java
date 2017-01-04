@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
 public class SwingSwipeAdapter extends RecyclerView.Adapter<SwingSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
-        void onRightItemDismissed(int position);
+        void onRightItemDismissed(Album album);
 
-        void onLeftItemDismissed(int position);
+        void onLeftItemDismissed(Album album);
     }
 
     private List<Album> mAlbums;
@@ -46,7 +46,7 @@ public class SwingSwipeAdapter extends RecyclerView.Adapter<SwingSwipeAdapter.Vi
         Context context = holder.itemView.getContext();
         Album album = getItem(position);
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
-        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
+        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(album));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
     }
@@ -62,10 +62,14 @@ public class SwingSwipeAdapter extends RecyclerView.Adapter<SwingSwipeAdapter.Vi
         return mAlbums.size();
     }
 
-    public void deleteItem(int position) {
-        mAlbums.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
+    public void deleteItem(Album album) {
+        int index = mAlbums.indexOf(album);
+        if (index == -1) {
+            return;
+        }
+        mAlbums.remove(album);
+        notifyItemRemoved(index);
+        notifyItemRangeChanged(index, getItemCount());
     }
 
     private Album getItem(int position) {
@@ -78,23 +82,23 @@ public class SwingSwipeAdapter extends RecyclerView.Adapter<SwingSwipeAdapter.Vi
 
     public class OnItemDismiss implements SwingCoordinatorLayout.OnDismissListener {
 
-        private int position;
+        private Album album;
 
-        public OnItemDismiss(int position) {
-            this.position = position;
+        public OnItemDismiss(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onRightDismissed() {
             if (mOnItemDismissListener != null) {
-                mOnItemDismissListener.onRightItemDismissed(position);
+                mOnItemDismissListener.onRightItemDismissed(album);
             }
         }
 
         @Override
         public void onLeftDismissed() {
             if (mOnItemDismissListener != null) {
-                mOnItemDismissListener.onLeftItemDismissed(position);
+                mOnItemDismissListener.onLeftItemDismissed(album);
             }
         }
     }

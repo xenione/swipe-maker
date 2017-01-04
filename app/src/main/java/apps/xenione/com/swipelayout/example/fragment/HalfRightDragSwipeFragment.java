@@ -46,8 +46,8 @@ public class HalfRightDragSwipeFragment extends Fragment implements HalfRightDra
     }
 
     @Override
-    public void onItemDismissed(int position) {
-        mAdapter.deleteItem(position);
-        Toast.makeText(getContext(), "item deleted at position :" + position, Toast.LENGTH_LONG).show();
+    public void onItemDismissed(Album album) {
+        mAdapter.deleteItem(album);
+        Toast.makeText(getContext(), "item deleted with title :" + album.getName(), Toast.LENGTH_LONG).show();
     }
 }

@@ -24,11 +24,11 @@ import butterknife.ButterKnife;
 public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.ViewHolder> {
 
     public interface OnItemDismissListener {
-        void onItemDismissed(int position);
+        void onItemDismissed(Album album);
     }
 
     public interface OnItemSelectListener {
-        void onItemSelected(int position);
+        void onItemSelected(Album album);
     }
 
     private List<Album> mAlbums;
@@ -49,8 +49,8 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         Context context = holder.itemView.getContext();
         Album album = getItem(position);
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
-        holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
-        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(position));
+        holder.foreground.setOnClickListener(new OnItemSelectedClick(album));
+        holder.coordinatorLayout.setOnDismissListener(new OnItemDismiss(album));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
     }
@@ -66,10 +66,14 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
         return mAlbums.size();
     }
 
-    public void deleteItem(int position) {
-        mAlbums.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
+    public void deleteItem(Album album) {
+        int index = mAlbums.indexOf(album);
+        if (index == -1) {
+            return;
+        }
+        mAlbums.remove(index);
+        notifyItemRemoved(index);
+        notifyItemRangeChanged(index, getItemCount());
     }
 
 
@@ -87,26 +91,26 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
 
     public class OnItemDismiss implements RightCoordinatorLayout.OnDismissListener {
 
-        private int position;
+        private Album album;
 
-        public OnItemDismiss(int position) {
-            this.position = position;
+        public OnItemDismiss(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onDismissed() {
             if (mOnItemDismissListener != null) {
-                mOnItemDismissListener.onItemDismissed(position);
+                mOnItemDismissListener.onItemDismissed(album);
             }
         }
     }
 
     private class OnItemSelectedClick implements View.OnClickListener{
 
-        private int position;
+        private Album position;
 
-        public OnItemSelectedClick(int position) {
-            this.position = position;
+        public OnItemSelectedClick(Album album) {
+            this.position = album;
         }
 
         @Override
