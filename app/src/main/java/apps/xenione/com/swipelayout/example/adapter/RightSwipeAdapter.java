@@ -107,16 +107,16 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
 
     private class OnItemSelectedClick implements View.OnClickListener{
 
-        private Album position;
+        private Album album;
 
         public OnItemSelectedClick(Album album) {
-            this.position = album;
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
             if (mOnItemDismissListener != null) {
-                mOnItemSelectListener.onItemSelected(position);
+                mOnItemSelectListener.onItemSelected(album);
             }
         }
     }

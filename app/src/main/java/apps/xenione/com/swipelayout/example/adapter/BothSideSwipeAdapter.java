@@ -25,9 +25,9 @@ import butterknife.ButterKnife;
 public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemDismissed(Album position);
+        void onItemDismissed(Album album);
 
-        void onItemAction(Album position);
+        void onItemAction(Album album);
     }
 
     private List<Album> mAlbums;

@@ -53,8 +53,8 @@ public class HalfRightSwipeFragment extends Fragment implements HalfRightSwipeAd
     }
 
     @Override
-    public void onItemSelected(int position) {
-        Toast.makeText(getContext(), "item selected at position :" + position, Toast.LENGTH_LONG).show();
+    public void onItemSelected(Album album) {
+        Toast.makeText(getContext(), "item selected with title :" + album.getName(), Toast.LENGTH_LONG).show();
 
     }
 }

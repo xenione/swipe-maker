@@ -28,7 +28,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
     }
 
     public interface OnItemSelectListener {
-        void onItemSelected(int position);
+        void onItemSelected(Album album);
     }
 
     private List<Album> mAlbums;
@@ -49,7 +49,7 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
         Context context = holder.itemView.getContext();
         Album album = getItem(position);
         Picasso.with(context).load(album.getResource()).placeholder(R.color.placeholder).into(holder.discImage);
-        holder.foreground.setOnClickListener(new OnItemSelectedClick(position));
+        holder.foreground.setOnClickListener(new OnItemSelectedClick(album));
         holder.title.setText(album.getName());
         holder.bandName.setText(album.getBandName());
         holder.delete.setOnClickListener(new OnItemDismiss(album));
@@ -107,16 +107,16 @@ public class HalfRightSwipeAdapter extends RecyclerView.Adapter<HalfRightSwipeAd
 
     private class OnItemSelectedClick implements View.OnClickListener{
 
-        private int position;
+        private Album album;
 
-        public OnItemSelectedClick(int position) {
-            this.position = position;
+        public OnItemSelectedClick(Album album) {
+            this.album = album;
         }
 
         @Override
         public void onClick(View v) {
             if (mOnItemSelectListener != null) {
-                mOnItemSelectListener.onItemSelected(position);
+                mOnItemSelectListener.onItemSelected(album);
             }
         }
     }
