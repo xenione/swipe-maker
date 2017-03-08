@@ -18,12 +18,13 @@ import com.xenione.libs.swipemaker.SwipeLayout;
  */
 public abstract class OrientationStrategy implements Runnable {
 
-    ScrollerHelper mHelperScroller;
-    final int mTouchSlop;
 
     private final Position mPositionInfo;
     private View mView;
     private SwipeLayout.OnTranslateChangeListener mOnTranslateChangeListener;
+    final int mTouchSlop;
+    ScrollerHelper mHelperScroller;
+
 
     public OrientationStrategy(View view) {
         mView = view;
@@ -80,7 +81,7 @@ public abstract class OrientationStrategy implements Runnable {
 
     boolean fling() {
         int start = getDelta();
-        int end = calculateEnd(start);
+        int end = endPositionFrom(start);
         boolean started = mHelperScroller.startScroll(start, end);
         ViewCompat.postOnAnimation(mView, this);
         return started;
@@ -98,7 +99,7 @@ public abstract class OrientationStrategy implements Runnable {
         }
     }
 
-    private int calculateEnd(int currPosition) {
+    private int endPositionFrom(int currPosition) {
         return mPositionInfo.closeTo(currPosition);
     }
 

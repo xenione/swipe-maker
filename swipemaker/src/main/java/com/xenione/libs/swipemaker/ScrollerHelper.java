@@ -8,20 +8,27 @@ import android.widget.OverScroller;
  */
 public class ScrollerHelper {
 
-    private static final int SCROLL_ANIMATION_DURATION = 3 * 1000;
-
     private OverScroller mScroller;
 
     public ScrollerHelper(Context context) {
         mScroller = new OverScroller(context);
     }
 
-    public boolean startScroll(int startX, int endX) {
-        if (startX == endX) {
+    public boolean startScroll(int start, int end) {
+        if (start == end) {
             return false;
         }
-        int deltaX = endX - startX;
-        mScroller.startScroll(startX, 0, deltaX, SCROLL_ANIMATION_DURATION);
+        int delta = end - start;
+        mScroller.startScroll(start, 0, delta, 0);
+        return true;
+    }
+
+    public boolean startScroll(int start, int end, int duration) {
+        if (start == end) {
+            return false;
+        }
+        int delta = end - start;
+        mScroller.startScroll(start, 0, delta, 0, duration);
         return true;
     }
 
