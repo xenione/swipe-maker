@@ -51,7 +51,6 @@ public abstract class AbsCoordinatorLayout extends FrameLayout implements SwipeL
         super.onFinishInflate();
         mForegroundView = (SwipeLayout) findViewById(R.id.foregroundView);
         mForegroundView.setOnTranslateChangeListener(this);
-        sync();
     }
 
     public void sync() {
