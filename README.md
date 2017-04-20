@@ -32,7 +32,7 @@ Add it on your project:
 
 Gradle:
 ```java 
-compile 'com.xenione.libs:swipe-maker:1.1.1'
+compile 'com.xenione.libs:swipe-maker:1.1.2'
 ```
 
 
