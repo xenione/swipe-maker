@@ -19,7 +19,7 @@ import com.xenione.libs.swipemaker.SwipeLayout;
 public abstract class OrientationStrategy implements Runnable {
 
 
-    private final Position mPositionInfo;
+    private Position mPositionInfo;
     private View mView;
     private SwipeLayout.OnTranslateChangeListener mOnTranslateChangeListener;
     final int mTouchSlop;
@@ -31,11 +31,10 @@ public abstract class OrientationStrategy implements Runnable {
         Context context = view.getContext();
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mHelperScroller = new ScrollerHelper(context);
-        mPositionInfo = new Position();
     }
 
     public void setAnchor(Integer... points) {
-        mPositionInfo.anchors = Anchors.make(points);
+        mPositionInfo = new Position(Anchors.make(points));
     }
 
     public void setOnTranslateChangeListener(SwipeLayout.OnTranslateChangeListener listener) {
@@ -108,5 +107,9 @@ public abstract class OrientationStrategy implements Runnable {
         if (parent != null) {
             parent.requestDisallowInterceptTouchEvent(disallow);
         }
+    }
+
+    public void startWith(int position) {
+        mPositionInfo.setCurrPos(position);
     }
 }

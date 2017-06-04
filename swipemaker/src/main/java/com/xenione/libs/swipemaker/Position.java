@@ -5,11 +5,21 @@ package com.xenione.libs.swipemaker;
  */
 public class Position {
 
-    public Anchors anchors;
-    public int currX;
+    private Anchors anchors;
+    private int currX;
     public int section;
     public float relative;
     public float global;
+
+    public Position(Anchors anchors) {
+        this.anchors = anchors;
+        setCurrPos(0);
+    }
+
+    public void setCurrPos(int pos) {
+        currX = pos;
+        section = anchors.sectionFor(pos);
+    }
 
     public void updatePosition(int newX) {
         if (currX == newX) {
@@ -39,10 +49,14 @@ public class Position {
         return currX > newX;
     }
 
+    private boolean moveToRight(int newX) {
+        return currX < newX;
+    }
+
     private void updateSection(int newX) {
         if (moveToLeft(newX) && (newX <= anchors.anchorFor(this.section))) {
             decSection();
-        } else if (newX > anchors.anchorFor(this.section + 1)) {
+        } else if (moveToRight(newX) && (newX > anchors.anchorFor(this.section + 1))) {
             incSection();
         }
     }

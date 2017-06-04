@@ -13,11 +13,12 @@ import android.widget.FrameLayout;
 public abstract class AbsCoordinatorLayout extends FrameLayout implements SwipeLayout.OnTranslateChangeListener {
 
     private SwipeLayout mForegroundView;
+    private int mStartPosition = 0;
 
     public Runnable initializeViews = new Runnable() {
         @Override
         public void run() {
-            mForegroundView.translateTo(0);
+            mForegroundView.translateTo(mStartPosition);
         }
     };
 
@@ -45,6 +46,11 @@ public abstract class AbsCoordinatorLayout extends FrameLayout implements SwipeL
     }
 
     public abstract void doInitialViewsLocation();
+
+    public void startWith(int position) {
+        mStartPosition = position;
+        mForegroundView.startWith(position);
+    }
 
     @Override
     protected void onFinishInflate() {

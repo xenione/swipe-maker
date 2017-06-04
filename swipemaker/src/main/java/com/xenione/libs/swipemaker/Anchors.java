@@ -6,13 +6,13 @@ import java.util.Arrays;
  * Created by Eugeni on 16/04/2016.
  */
 public class Anchors {
-    Anchor anchor;
+    AnchorHelper anchorHelper;
 
-    private static class Anchor {
+    private static class AnchorHelper {
 
         private Integer[] anchors;
 
-        public Anchor(Integer[] anchor) {
+        public AnchorHelper(Integer[] anchor) {
             this.anchors = anchor;
         }
 
@@ -26,6 +26,30 @@ public class Anchors {
 
         public int pos(int index) {
             return anchors[index];
+        }
+
+        public int sectionFromInf(int position) {
+            int section = 0;
+            for (int i = 0; i < anchors.length - 1; i++) {
+                if (anchors[i] > position) {
+                    section = i;
+                    break;
+                }
+            }
+
+            return section;
+        }
+
+        public int sectionFromSup(int position) {
+            int section = 0;
+            for (int i = anchors.length - 1; i >= 0; i--) {
+                if (anchors[i] < position) {
+                    section = i;
+                    break;
+                }
+            }
+
+            return section;
         }
 
         public int size() {
@@ -45,8 +69,8 @@ public class Anchors {
         }
     }
 
-    private Anchors(Anchor anchor) {
-        this.anchor = anchor;
+    private Anchors(Integer[] anchor) {
+        this.anchorHelper = new AnchorHelper(anchor);
     }
 
     public static Anchors make(Integer[] anchors) {
@@ -54,19 +78,19 @@ public class Anchors {
             throw new IllegalArgumentException("Amount of anchor points provided to SwipeLayout have to be bigger than 2");
         }
         Arrays.sort(anchors);
-        return new Anchors(new Anchor(anchors));
+        return new Anchors(anchors);
     }
 
     public int size() {
-        return anchor.size();
+        return anchorHelper.size();
     }
 
     public float distance(int x) {
-        return distance(x, anchor.getSupLimit(), anchor.getInfLimit());
+        return distance(x, anchorHelper.getSupLimit(), anchorHelper.getInfLimit());
     }
 
     public float distance(int section, int x) {
-        return distance(x, anchor.next(section), anchor.pos(section));
+        return distance(x, anchorHelper.next(section), anchorHelper.pos(section));
     }
 
     private float distance(int x, int limitSup, int limitInf) {
@@ -74,24 +98,28 @@ public class Anchors {
     }
 
     public int anchorFor(int section) {
-        return anchor.pos(section);
+        return anchorHelper.pos(section);
+    }
+
+    public int sectionFor(int position) {
+        return anchorHelper.sectionFromSup(position);
     }
 
     public int closeTo(int section, int point) {
-        int distInf = Anchor.distance(point, anchor.pos(section));
-        int distSup = Anchor.distance(point, anchor.next(section));
+        int distInf = AnchorHelper.distance(point, anchorHelper.pos(section));
+        int distSup = AnchorHelper.distance(point, anchorHelper.next(section));
         if (distInf < distSup) {
-            return anchor.pos(section);
+            return anchorHelper.pos(section);
         }
-        return anchor.next(section);
+        return anchorHelper.next(section);
     }
 
     public int cropInLimits(int x) {
         int inBounds = x;
-        if (x < anchor.getInfLimit()) {
-            inBounds = anchor.getInfLimit();
-        } else if (x > anchor.getSupLimit()) {
-            inBounds = anchor.getSupLimit();
+        if (x < anchorHelper.getInfLimit()) {
+            inBounds = anchorHelper.getInfLimit();
+        } else if (x > anchorHelper.getSupLimit()) {
+            inBounds = anchorHelper.getSupLimit();
         }
         return inBounds;
     }
