@@ -5,12 +5,11 @@ sudo: false
 android:
   components:
     - tools
-    - build-tools-25.0.2
     - platform-tools
-    - android-22
-    - android-24
-    - sys-img-armeabi-v7a-android-22
+    - build-tools-25.0.2
+    - android-25
     - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-22
 
 before_script:
   # Create and start emulator
