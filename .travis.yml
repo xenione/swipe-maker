@@ -5,9 +5,10 @@ sudo: false
 android:
   components:
     - tools
-    - platform-tools
     - build-tools-25.0.2
+    - android-25
     - android-22
+    - platform-tools
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-22
 
