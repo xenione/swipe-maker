@@ -69,6 +69,10 @@ public class SwipeLayout extends FrameLayout {
         init();
     }
 
+    public void startWith(int position) {
+        orientationStrategy.startWith(position);
+    }
+    
     private void init() {
         orientationStrategy = Orientation.HORIZONTAL.get().make(this);
     }
