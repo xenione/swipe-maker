@@ -11,14 +11,14 @@ public class Position {
     public float relative;
     public float global;
 
-    public Position(Anchors anchors) {
+    public void setAnchors(Anchors anchors) {
         this.anchors = anchors;
         setCurrPos(0);
     }
 
     public void setCurrPos(int pos) {
         currX = pos;
-        section = anchors.sectionFor(pos);
+        section = anchors == null ? 0 : anchors.sectionFor(pos);
     }
 
     public void updatePosition(int newX) {
@@ -54,6 +54,9 @@ public class Position {
     }
 
     private void updateSection(int newX) {
+        if (anchors == null) {
+            return;
+        }
         if (moveToLeft(newX) && (newX <= anchors.anchorFor(this.section))) {
             decSection();
         } else if (moveToRight(newX) && (newX > anchors.anchorFor(this.section + 1))) {
@@ -62,19 +65,19 @@ public class Position {
     }
 
     public float global(int posX) {
-        return anchors.distance(posX);
+        return anchors == null ? posX : anchors.distance(posX);
     }
 
     public float relative(int posX) {
-        return anchors.distance(this.section, posX);
+        return anchors == null ? posX : anchors.distance(this.section, posX);
     }
 
     public int closeTo(int posX) {
-        return anchors.closeTo(section, posX);
+        return anchors == null ? posX : anchors.closeTo(section, posX);
     }
 
     public int cropInLimits(int posX) {
-        return anchors.cropInLimits(posX);
+        return anchors == null ? posX : anchors.cropInLimits(posX);
     }
 }
 

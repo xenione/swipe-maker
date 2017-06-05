@@ -16,14 +16,16 @@ limitations under the License.
 */
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import static org.hamcrest.CoreMatchers.either;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+@RunWith(JUnit4.class)
 public class AnchorsTest {
-
 
     @Test
     public void closeTo_whenNegativeAnchors_giveClosestAnchor() {

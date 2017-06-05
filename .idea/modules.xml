@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SwipeLayout.iml" filepath="$PROJECT_DIR$/SwipeLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipe-maker.iml" filepath="$PROJECT_DIR$/swipe-maker.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipemaker/swipemaker.iml" filepath="$PROJECT_DIR$/swipemaker/swipemaker.iml" />
     </modules>
   </component>
