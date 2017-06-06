@@ -20,5 +20,6 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew test coveralls
-    - ./gradlew connectedAndroidTest coveralls
+    - ./gradlew test
+    - ./gradlew connectedAndroidTest
+    - ./gradlew clean jacocoTestReport coveralls
