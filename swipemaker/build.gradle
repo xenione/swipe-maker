@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.kt3k.coveralls'
+
 
 ext {
     PUBLISH_GROUP_ID = 'com.xenione.libs'
@@ -21,10 +23,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
     testOptions {
         unitTests.returnDefaultValues = true
     }
+}
+
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
 }
 
 dependencies {
@@ -33,6 +42,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     // add mockito dependencies
     testCompile "org.mockito:mockito-core:2.7.21"
+}
+tasks.coveralls {
+    dependsOn 'connectedAndroidTest'
+    onlyIf { System.env.'CI' }
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
