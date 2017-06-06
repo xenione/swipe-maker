@@ -70,7 +70,7 @@ public class TwoStepRightCoordinatorLayout extends AbsCoordinatorLayout {
         mBg = (ImageView) findViewById(R.id.bg_disc);
         mDelete = findViewById(R.id.delete);
         mAction = findViewById(R.id.action);
-        mForegroundView.anchor(0, -mDelete.getRight(), -mAction.getRight());
+        mForegroundView.anchor(0, mDelete.getRight(), mAction.getRight());
     }
 
     @Override
