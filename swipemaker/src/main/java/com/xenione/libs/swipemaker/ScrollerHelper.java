@@ -1,6 +1,5 @@
 package com.xenione.libs.swipemaker;
 
-import android.content.Context;
 import android.widget.OverScroller;
 
 /**
@@ -10,8 +9,8 @@ public class ScrollerHelper {
 
     private OverScroller mScroller;
 
-    public ScrollerHelper(Context context) {
-        mScroller = new OverScroller(context);
+    public ScrollerHelper(OverScroller overScroller) {
+        mScroller = overScroller;
     }
 
     public boolean startScroll(int start, int end) {

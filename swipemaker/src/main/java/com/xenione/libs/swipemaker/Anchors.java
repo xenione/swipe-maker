@@ -85,9 +85,22 @@ public class Anchors {
         return anchorHelper.size();
     }
 
+    /**
+     * Gives distance relative (1%) within the superior limit and the
+     * Inferior limit from the inferior limit.
+     * @param x point from where to get relative distance
+     * @return 1% from inf limit
+     */
     public float distance(int x) {
         return distance(x, anchorHelper.getSupLimit(), anchorHelper.getInfLimit());
     }
+
+    /**
+     * Gives distance relative (1%) within the superior Section limit and the
+     * Inferior Section limit from the inferior limit.
+     * @param x point from where to get relative distance
+     * @return 1% from inf limit
+     */
 
     public float distance(int section, int x) {
         return distance(x, anchorHelper.next(section), anchorHelper.pos(section));
@@ -102,6 +115,9 @@ public class Anchors {
     }
 
     public int sectionFor(int position) {
+        if ((position > anchorHelper.getSupLimit()) || (position < anchorHelper.getInfLimit())) {
+            throw new IllegalArgumentException("position exceed limits");
+        }
         return anchorHelper.sectionFromSup(position);
     }
 

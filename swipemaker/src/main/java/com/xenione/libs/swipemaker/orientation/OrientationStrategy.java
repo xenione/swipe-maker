@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
+import android.widget.OverScroller;
 
 import com.xenione.libs.swipemaker.Anchors;
 import com.xenione.libs.swipemaker.Position;
@@ -27,14 +28,19 @@ public abstract class OrientationStrategy implements Runnable {
 
 
     public OrientationStrategy(View view) {
+        this(view, ViewConfiguration.get(view.getContext()).getScaledTouchSlop());
+    }
+
+    public OrientationStrategy(View view, int touchSlop) {
         mView = view;
         Context context = view.getContext();
-        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        mHelperScroller = new ScrollerHelper(context);
+        mTouchSlop = touchSlop;
+        mHelperScroller = new ScrollerHelper(new OverScroller(context));
+        mPositionInfo = new Position();
     }
 
     public void setAnchor(Integer... points) {
-        mPositionInfo = new Position(Anchors.make(points));
+        mPositionInfo.setAnchors(Anchors.make(points));
     }
 
     public void setOnTranslateChangeListener(SwipeLayout.OnTranslateChangeListener listener) {
@@ -102,7 +108,7 @@ public abstract class OrientationStrategy implements Runnable {
         return mPositionInfo.closeTo(currPosition);
     }
 
-    public void disallowParentInterceptTouchEvent(boolean disallow) {
+    void disallowParentInterceptTouchEvent(boolean disallow) {
         ViewParent parent = mView.getParent();
         if (parent != null) {
             parent.requestDisallowInterceptTouchEvent(disallow);

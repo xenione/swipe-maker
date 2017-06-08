@@ -18,6 +18,11 @@ public class HorizontalOrientationStrategy extends OrientationStrategy {
         mView = view;
     }
 
+    public HorizontalOrientationStrategy(View view, int slopTouch) {
+        super(view, slopTouch);
+        mView = view;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
