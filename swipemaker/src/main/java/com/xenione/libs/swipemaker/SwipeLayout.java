@@ -60,44 +60,47 @@ public class SwipeLayout extends FrameLayout {
 
     public SwipeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public SwipeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
-    public void startWith(int position) {
-        orientationStrategy.startWith(position);
-    }
-    
-    private void init() {
-        orientationStrategy = Orientation.HORIZONTAL.get().make(this);
     }
 
     public void setOrientation(Orientation orientation) {
         orientationStrategy = orientation.get().make(this);
     }
 
+    public void setOrientation(OrientationStrategyFactory factory) {
+        orientationStrategy = factory.make(this);
+    }
+
+    public void startWith(int position) {
+        makeSureOrientationStrategy();
+        orientationStrategy.startWith(position);
+    }
+
     public void anchor(Integer... points) {
+        makeSureOrientationStrategy();
         orientationStrategy.setAnchor(points);
     }
 
     public void setOnTranslateChangeListener(OnTranslateChangeListener listener) {
+        makeSureOrientationStrategy();
         orientationStrategy.setOnTranslateChangeListener(listener);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        makeSureOrientationStrategy();
         return orientationStrategy.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        makeSureOrientationStrategy();
         boolean handled = orientationStrategy.onTouchEvent(event);
-        if(!handled){
+        if (!handled) {
             super.onTouchEvent(event);
         }
         return true;
@@ -107,8 +110,14 @@ public class SwipeLayout extends FrameLayout {
         orientationStrategy.translateTo(position);
     }
 
+    private void makeSureOrientationStrategy() {
+        if (orientationStrategy != null) {
+            return;
+        }
+        orientationStrategy = Orientation.HORIZONTAL.get().make(this);
+    }
 
-    static class HorizontalOrientationStrategyFactory implements OrientationStrategyFactory {
+    public static class HorizontalOrientationStrategyFactory implements OrientationStrategyFactory {
 
         @Override
         public OrientationStrategy make(View view) {
@@ -116,7 +125,7 @@ public class SwipeLayout extends FrameLayout {
         }
     }
 
-    static class VerticalOrientationStrategyFactory implements OrientationStrategyFactory {
+    public static class VerticalOrientationStrategyFactory implements OrientationStrategyFactory {
 
         @Override
         public OrientationStrategy make(View view) {
