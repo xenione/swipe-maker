@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
+import android.widget.OverScroller;
 
 import com.xenione.libs.swipemaker.Anchors;
 import com.xenione.libs.swipemaker.Position;
@@ -34,7 +35,7 @@ public abstract class OrientationStrategy implements Runnable {
         mView = view;
         Context context = view.getContext();
         mTouchSlop = touchSlop;
-        mHelperScroller = new ScrollerHelper(context);
+        mHelperScroller = new ScrollerHelper(new OverScroller(context));
         mPositionInfo = new Position();
     }
 

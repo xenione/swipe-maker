@@ -29,7 +29,10 @@ import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4.class)
@@ -82,6 +85,34 @@ public class HorizontalOrientationStrategyTest {
         hOStrategy.onTouchEvent(eventDrag);
 
         Mockito.verify(view).setTranslationX(49f);
+    }
+
+    @Test
+    public void whenSlideGestureAndThenNoIncreaseTouch_ShouldViewTranslateWithZero() {
+        applySlideGesture();
+
+        MotionEvent eventDrag = mock(MotionEvent.class);
+        when(eventDrag.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
+        when(eventDrag.getX()).thenReturn(touchSlop + 1f);
+        hOStrategy.onTouchEvent(eventDrag);
+
+        Mockito.verify(view, never()).setTranslationX(anyInt());
+    }
+
+    @Test
+    public void whenSlideGesture_ShouldNotifyChangePositionToListener() {
+        applySlideGesture();
+
+        MotionEvent eventDrag = mock(MotionEvent.class);
+        when(eventDrag.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
+        when(eventDrag.getX()).thenReturn(100f);
+
+        SwipeLayout.OnTranslateChangeListener listener = mock(SwipeLayout.OnTranslateChangeListener.class);
+        hOStrategy.setAnchor(0, 100);
+        hOStrategy.setOnTranslateChangeListener(listener);
+        hOStrategy.onTouchEvent(eventDrag);
+
+        verify(listener).onTranslateChange(0.49f, 0, 0.49f);
     }
 
     private boolean applySlideGesture(){
