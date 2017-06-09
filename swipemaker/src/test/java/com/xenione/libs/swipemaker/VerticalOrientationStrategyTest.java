@@ -19,7 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
-import com.xenione.libs.swipemaker.orientation.HorizontalOrientationStrategy;
+import com.xenione.libs.swipemaker.orientation.VerticalOrientationStrategy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,19 +36,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4.class)
-public class HorizontalOrientationStrategyTest {
+public class VerticalOrientationStrategyTest {
 
     final int touchSlop = 50;
     private View view;
     private ViewParent parent;
-    private HorizontalOrientationStrategy hOStrategy;
+    private VerticalOrientationStrategy vOStrategy;
 
     @Before
     public void setup() {
         view = mock(View.class);
         parent = mock(ViewParent.class);
         when(view.getParent()).thenReturn(parent);
-        hOStrategy = new HorizontalOrientationStrategy(view, touchSlop);
+        vOStrategy = new VerticalOrientationStrategy(view, touchSlop);
     }
 
     @Test
@@ -69,8 +69,8 @@ public class HorizontalOrientationStrategyTest {
 
         MotionEvent eventCancel = mock(MotionEvent.class);
         when(eventCancel.getAction()).thenReturn(MotionEvent.ACTION_CANCEL);
-        when(eventCancel.getX()).thenReturn(0f);
-        hOStrategy.onTouchEvent(eventCancel);
+        when(eventCancel.getY()).thenReturn(0f);
+        vOStrategy.onTouchEvent(eventCancel);
 
         Mockito.verify(parent).requestDisallowInterceptTouchEvent(false);
     }
@@ -81,10 +81,10 @@ public class HorizontalOrientationStrategyTest {
 
         MotionEvent eventDrag = mock(MotionEvent.class);
         when(eventDrag.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
-        when(eventDrag.getX()).thenReturn(100f);
-        hOStrategy.onTouchEvent(eventDrag);
+        when(eventDrag.getY()).thenReturn(100f);
+        vOStrategy.onTouchEvent(eventDrag);
 
-        Mockito.verify(view).setTranslationX(49f);
+        Mockito.verify(view).setTranslationY(49f);
     }
 
     @Test
@@ -93,8 +93,8 @@ public class HorizontalOrientationStrategyTest {
 
         MotionEvent eventDrag = mock(MotionEvent.class);
         when(eventDrag.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
-        when(eventDrag.getX()).thenReturn(touchSlop + 1f);
-        hOStrategy.onTouchEvent(eventDrag);
+        when(eventDrag.getY()).thenReturn(touchSlop + 1f);
+        vOStrategy.onTouchEvent(eventDrag);
 
         Mockito.verify(view, never()).setTranslationX(anyInt());
     }
@@ -105,30 +105,30 @@ public class HorizontalOrientationStrategyTest {
 
         MotionEvent eventDrag = mock(MotionEvent.class);
         when(eventDrag.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
-        when(eventDrag.getX()).thenReturn(100f);
+        when(eventDrag.getY()).thenReturn(100f);
 
         SwipeLayout.OnTranslateChangeListener listener = mock(SwipeLayout.OnTranslateChangeListener.class);
-        hOStrategy.setAnchor(0, 100);
-        hOStrategy.setOnTranslateChangeListener(listener);
-        hOStrategy.onTouchEvent(eventDrag);
+        vOStrategy.setAnchor(0, 100);
+        vOStrategy.setOnTranslateChangeListener(listener);
+        vOStrategy.onTouchEvent(eventDrag);
 
         verify(listener).onTranslateChange(0.49f, 0, 0.49f);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void whenSetLessThanTwoAnchors_ShouldThrowAnException() {
-        hOStrategy.setAnchor(0);
+        vOStrategy.setAnchor(0);
     }
 
     private boolean applySlideGesture(){
         MotionEvent eventDown = mock(MotionEvent.class);
         when(eventDown.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
-        when(eventDown.getX()).thenReturn(0f);
-        hOStrategy.onInterceptTouchEvent(eventDown);
+        when(eventDown.getY()).thenReturn(0f);
+        vOStrategy.onInterceptTouchEvent(eventDown);
 
         MotionEvent eventMove = mock(MotionEvent.class);
         when(eventMove.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
-        when(eventMove.getX()).thenReturn(touchSlop + 1f);
-        return hOStrategy.onInterceptTouchEvent(eventMove);
+        when(eventMove.getY()).thenReturn(touchSlop + 1f);
+        return vOStrategy.onInterceptTouchEvent(eventMove);
     }
 }
