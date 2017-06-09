@@ -81,6 +81,10 @@ public class Anchors {
         return new Anchors(anchors);
     }
 
+    /**
+     * Gives the amount of anchors that are set.
+     * @return amount of anchors.
+     */
     public int size() {
         return anchorHelper.size();
     }

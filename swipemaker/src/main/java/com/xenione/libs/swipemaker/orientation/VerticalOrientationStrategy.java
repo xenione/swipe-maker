@@ -18,6 +18,11 @@ public class VerticalOrientationStrategy extends OrientationStrategy {
         mView = view;
     }
 
+    public VerticalOrientationStrategy(View view, int slopTouch) {
+        super(view, slopTouch);
+        mView = view;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
