@@ -1,5 +1,7 @@
 # Easy Swipe Maker
 
+[![Code Sponsor](https://app.codesponsor.io/embed/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker.svg)](https://app.codesponsor.io/link/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker)
+
  [![Download](https://api.bintray.com/packages/xenione/maven/Swipe-maker/images/download.svg) ](https://bintray.com/xenione/maven/Swipe-maker/_latestVersion)
  [![CI](https://api.travis-ci.org/xenione/swipe-maker.svg?branch=develop) ](https://travis-ci.org/xenione/swipe-maker)
  [![Coverage Status](https://coveralls.io/repos/github/xenione/swipe-maker/badge.svg?branch=develop)](https://coveralls.io/github/xenione/swipe-maker?branch=develop)
