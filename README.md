@@ -1,7 +1,7 @@
 # Easy Swipe Maker
 
-<a target="_blank" rel="nofollow" href="https://app.codesponsor.io/link/VijWTXcqR6TaovNHARAaH3XU/xenione/swipeMaker">
-  <img alt="Sponsor" src="https://app.codesponsor.io/embed/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker.svg" />
+<a target="_blank" rel="nofollow" href="https://app.codesponsor.io/link/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker">
+  <img alt="Sponsor" src="https://app.codesponsor.io/embed/VijWTXcqR6TaovNHARAaH3XU/xenione/swipeMaker.svg" />
 </a>
 
  [![Download](https://api.bintray.com/packages/xenione/maven/Swipe-maker/images/download.svg) ](https://bintray.com/xenione/maven/Swipe-maker/_latestVersion)
