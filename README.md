@@ -1,15 +1,14 @@
 # Easy Swipe Maker
 
-<a target="_blank" rel="nofollow" href="https://app.codesponsor.io/link/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker">
-  <img alt="Sponsor" src="https://app.codesponsor.io/embed/VijWTXcqR6TaovNHARAaH3XU/xenione/swipeMaker.svg" />
-</a>
-
-
  [![Download](https://api.bintray.com/packages/xenione/maven/Swipe-maker/images/download.svg) ](https://bintray.com/xenione/maven/Swipe-maker/_latestVersion)
  [![CI](https://api.travis-ci.org/xenione/swipe-maker.svg?branch=develop) ](https://travis-ci.org/xenione/swipe-maker)
  [![Coverage Status](https://coveralls.io/repos/github/xenione/swipe-maker/badge.svg?branch=develop)](https://coveralls.io/github/xenione/swipe-maker?branch=develop)
  [![Counter Download](https://img.shields.io/badge/dowloads-1%2C3k-green.svg)](https://bintray.com/xenione/maven/Swipe-maker#statistics)
  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20Swipe%20Maker-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5020)
+
+
+[![Code Sponsor](https://app.codesponsor.io/embed/VijWTXcqR6TaovNHARAaH3XU/xenione/swipeMaker.svg)](https://app.codesponsor.io/link/VijWTXcqR6TaovNHARAaH3XU/xenione/swipe-maker)
+
 
 From the library to build your own swipeout item views. These examples will only take 5 minutes each. Have a look at the demos app available on [google play](https://play.google.com/store/apps/details?id=apps.xenione.com.swipelayout) (is not updated -NO Swing and Vertical swipe examples)
 
