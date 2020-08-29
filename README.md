@@ -3,7 +3,7 @@
  [![Download](https://api.bintray.com/packages/xenione/maven/Swipe-maker/images/download.svg) ](https://bintray.com/xenione/maven/Swipe-maker/_latestVersion)
  [![CI](https://api.travis-ci.org/xenione/swipe-maker.svg?branch=develop) ](https://travis-ci.org/xenione/swipe-maker)
  [![Coverage Status](https://coveralls.io/repos/github/xenione/swipe-maker/badge.svg?branch=develop)](https://coveralls.io/github/xenione/swipe-maker?branch=develop)
- [![Counter Download](https://img.shields.io/badge/dowloads-1%2C3k-green.svg)](https://bintray.com/xenione/maven/Swipe-maker#statistics)
+ [![Counter Download](https://img.shields.io/badge/dowloads-13%2C5k-green.svg)](https://bintray.com/xenione/maven/Swipe-maker#statistics)
  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Easy%20Swipe%20Maker-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5020)
 
 
