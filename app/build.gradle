@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android {
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
 }
 
 dependencies {
@@ -26,7 +33,6 @@ dependencies {
     compile 'com.google.android.material:material:1.2.1'
     compile 'androidx.recyclerview:recyclerview:1.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':swipemaker')
 }
 

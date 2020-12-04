@@ -15,8 +15,6 @@ import java.util.List;
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
 import apps.xenione.com.swipelayout.example.swipe.HalfRightDragFrictionCoordinatorLayout;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -94,20 +92,19 @@ public class HalfRightDragFrictionSwipeAdapter extends RecyclerView.Adapter<Half
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.title)
         public TextView title;
-        @Bind(R.id.bandName)
         public TextView bandName;
-        @Bind(R.id.bg_disc)
         public ImageView discImage;
-        @Bind(R.id.backgroundView)
         public View delete;
         public HalfRightDragFrictionCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(View view) {
             super(view);
             coordinatorLayout = (HalfRightDragFrictionCoordinatorLayout) view;
-            ButterKnife.bind(this, view);
+            title = view.findViewById(R.id.title);
+            bandName = view.findViewById(R.id.bandName);
+            discImage = view.findViewById(R.id.bg_disc);
+            delete = view.findViewById(R.id.backgroundView);
         }
     }
 }
