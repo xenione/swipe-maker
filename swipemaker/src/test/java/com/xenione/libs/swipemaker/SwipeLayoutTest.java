@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import android.test.mock.MockContext;
+import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -42,7 +42,8 @@ public class SwipeLayoutTest {
 
     @Before
     public void setup() {
-        swipeLayout = new SwipeLayout(new MockContext());
+        Context mockContext = mock(Context.class);
+        swipeLayout = new SwipeLayout(mockContext);
         orientationStrategy = mock(OrientationStrategy.class);
         OrientationStrategyFactory orientationStrategyFactory = new OrientationStrategyFactory() {
             @Override
