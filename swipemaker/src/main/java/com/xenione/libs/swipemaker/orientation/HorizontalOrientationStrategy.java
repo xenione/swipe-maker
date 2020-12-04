@@ -1,6 +1,6 @@
 package com.xenione.libs.swipemaker.orientation;
 
-import android.support.v4.view.MotionEventCompat;
+import androidx.core.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
