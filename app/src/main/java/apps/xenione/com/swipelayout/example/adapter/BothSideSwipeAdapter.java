@@ -1,7 +1,7 @@
 package apps.xenione.com.swipelayout.example.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +16,6 @@ import java.util.List;
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
 import apps.xenione.com.swipelayout.example.swipe.BothSideCoordinatorLayout;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -113,21 +111,20 @@ public class BothSideSwipeAdapter extends RecyclerView.Adapter<BothSideSwipeAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public BothSideCoordinatorLayout coordinatorLayout;
-        @Bind(R.id.title)
         public TextView title;
-        @Bind(R.id.bandName)
         public TextView bandName;
-        @Bind(R.id.bg_disc)
         public ImageView discImage;
-        @Bind(R.id.delete)
         public ImageButton delete;
-        @Bind(R.id.action)
         public ImageButton action;
 
         public ViewHolder(View view) {
             super(view);
             coordinatorLayout = (BothSideCoordinatorLayout) view;
-            ButterKnife.bind(this, view);
+            title = view.findViewById(R.id.title);
+            bandName = view.findViewById(R.id.bandName);
+            discImage = view.findViewById(R.id.bg_disc);
+            delete = view.findViewById(R.id.delete);
+            action = view.findViewById(R.id.action);
         }
     }
 }

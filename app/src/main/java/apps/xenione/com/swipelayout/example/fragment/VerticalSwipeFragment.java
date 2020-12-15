@@ -1,11 +1,11 @@
 package apps.xenione.com.swipelayout.example.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +18,6 @@ import com.squareup.picasso.Picasso;
 
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Eugeni on 13/04/2016.
@@ -35,14 +32,13 @@ public class VerticalSwipeFragment extends Fragment {
         return new VerticalSwipeFragment();
     }
 
-    @Bind(R.id.pager)
     ViewPager viewPager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vertical_swipe, container, false);
-        ButterKnife.bind(this, view);
+        viewPager = view.findViewById(R.id.pager);
         initViews();
         return view;
     }
@@ -54,7 +50,6 @@ public class VerticalSwipeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     private static class AlbumPagerAdapter extends FragmentStatePagerAdapter {
@@ -84,13 +79,9 @@ public class VerticalSwipeFragment extends Fragment {
             return fragment;
         }
 
-        @Bind(R.id.title)
         TextView titleTV;
-        @Bind(R.id.bandName)
         TextView bandNameTV;
-        @Bind(R.id.bg_disc)
         ImageView discBg;
-        @Bind(R.id.body_text)
         TextView bodyText;
 
         private Album getAlbumArg() {
@@ -101,7 +92,26 @@ public class VerticalSwipeFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_vertical_swipe_page, container, false);
-            ButterKnife.bind(this, view);
+            titleTV = view.findViewById(R.id.title);
+            bandNameTV = view.findViewById(R.id.bandName);
+            discBg = view.findViewById(R.id.bg_disc);
+            bodyText = view.findViewById(R.id.body_text);
+
+            view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), getString(R.string.delete_label), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            view.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), getString(R.string.action_label), Toast.LENGTH_LONG).show();
+                }
+            });
+
+
             initViews();
             return view;
         }
@@ -117,17 +127,6 @@ public class VerticalSwipeFragment extends Fragment {
         @Override
         public void onDestroyView() {
             super.onDestroyView();
-            ButterKnife.unbind(this);
-        }
-
-        @OnClick(R.id.delete)
-        public void delete() {
-            Toast.makeText(getActivity(), getString(R.string.delete_label), Toast.LENGTH_LONG).show();
-        }
-
-        @OnClick(R.id.action)
-        public void action() {
-            Toast.makeText(getActivity(), getString(R.string.action_label), Toast.LENGTH_LONG).show();
         }
     }
 }

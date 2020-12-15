@@ -1,6 +1,5 @@
 package com.xenione.libs.swipemaker.orientation;
 
-import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -25,7 +24,7 @@ public class HorizontalOrientationStrategy extends OrientationStrategy {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        final int action = MotionEventCompat.getActionMasked(ev);
+        final int action = ev.getAction();
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             fling();
             return false;
@@ -53,7 +52,7 @@ public class HorizontalOrientationStrategy extends OrientationStrategy {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        final int action = MotionEventCompat.getActionMasked(event);
+        final int action = event.getAction();
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             if (mIsDragging) {
                 disallowParentInterceptTouchEvent(false);

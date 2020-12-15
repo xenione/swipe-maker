@@ -1,7 +1,7 @@
 package apps.xenione.com.swipelayout.example.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +15,6 @@ import java.util.List;
 import apps.xenione.com.swipelayout.R;
 import apps.xenione.com.swipelayout.example.data.Album;
 import apps.xenione.com.swipelayout.example.swipe.RightCoordinatorLayout;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Eugeni on 10/04/2016.
@@ -122,20 +120,19 @@ public class RightSwipeAdapter extends RecyclerView.Adapter<RightSwipeAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.title)
         public TextView title;
-        @Bind(R.id.bandName)
         public TextView bandName;
-        @Bind(R.id.bg_disc)
         public ImageView discImage;
-        @Bind(R.id.foregroundView)
         public View foreground;
         public RightCoordinatorLayout coordinatorLayout;
 
         public ViewHolder(final View view) {
             super(view);
-            ButterKnife.bind(this, view);
             coordinatorLayout = (RightCoordinatorLayout) view;
+            title = view.findViewById(R.id.title);
+            bandName = view.findViewById(R.id.bandName);
+            discImage = view.findViewById(R.id.bg_disc);
+            foreground = view.findViewById(R.id.foregroundView);
         }
     }
 }
